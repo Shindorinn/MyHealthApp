@@ -18,7 +18,7 @@ import org.json.JSONTokener;
 import android.util.Base64;
 
 public final class RestClient {
-	public static String API_URL = ""; // TODO : Add URL
+	public static String API_URL = "http://myhealth.omninous.com/";
 	public static String CHARSET = "UTF-8";
 		
 	private String username;
