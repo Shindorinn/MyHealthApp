@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 
-public class MainActivity extends Activity {
+public class BaseActivity extends Activity {
 
 	public static final String REST_CALL_SUCCESS = "success";
 	

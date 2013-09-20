@@ -9,13 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class HomeActivity extends MainActivity {
+public class HomeActivity extends BaseActivity {
 
-	public static final int LOGIN_REQUEST 		  = 0;
-	public static final int LOGIN_REQUEST_SUCCESS = 1;
-	public static final int LOGIN_REQUEST_FAILED  = 2;
-	
-	
 	private Button takeMeasurementButton;
 	private Button viewMeasurementsButton;
 	private Button manageBluetoothDevicesButton;
@@ -25,11 +20,11 @@ public class HomeActivity extends MainActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		initializeActivity();
 		setContentView(R.layout.activity_home);
 
-		if(!super.sharedPreferences.getBoolean(MainActivity.LOGIN_BOOLEAN, false)){
+		initializeActivity();
+
+		if(!super.sharedPreferences.getBoolean(BaseActivity.LOGIN_BOOLEAN, false)){ // TODO
 			goToLoginScreen();
 		}
 		
@@ -50,10 +45,10 @@ public class HomeActivity extends MainActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		switch(requestCode){
-		case HomeActivity.LOGIN_REQUEST :
-			if(resultCode == HomeActivity.LOGIN_REQUEST_SUCCESS){
+		case Registry.TASK_LOGIN_REQUEST :
+			if(resultCode == Registry.TASK_LOGIN_REQUEST_SUCCESS){
 				
-			}else if(resultCode == HomeActivity.LOGIN_REQUEST_FAILED){
+			}else if(resultCode == Registry.TASK_LOGIN_REQUEST_FAILED){
 				goToLoginScreen();
 			}
 		
@@ -62,7 +57,7 @@ public class HomeActivity extends MainActivity {
 	
 	private void goToLoginScreen() {
 		Intent loginScreenIntent = new Intent(this, LoginActivity.class);
-		this.startActivity(loginScreenIntent);
+		this.startActivityForResult(loginScreenIntent, Registry.TASK_LOGIN_REQUEST);
 		
 	}
 
@@ -102,6 +97,15 @@ public class HomeActivity extends MainActivity {
 		});
 		
 		this.takeAPictureButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		this.chooseLanguageButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
