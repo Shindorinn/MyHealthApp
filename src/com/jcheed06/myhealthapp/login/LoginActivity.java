@@ -3,19 +3,10 @@ package com.jcheed06.myhealthapp.login;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
-import com.jcheed06.myhealthapp.R;
-import com.jcheed06.myhealthapp.R.id;
-import com.jcheed06.myhealthapp.R.layout;
-import com.jcheed06.myhealthapp.R.menu;
-import com.jcheed06.myhealthapp.R.string;
-import com.jcheed06.myhealthapp.Registry;
-import com.jcheed06.myhealthapp.tasks.UserLoginTask;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
@@ -28,6 +19,10 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.jcheed06.myhealthapp.R;
+import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.tasks.UserLoginTask;
 
 /**
  * Activity which displays a login screen to the user, offering registration as

@@ -3,12 +3,11 @@ package com.jcheed06.myhealthapp.tasks;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.login.RestClient;
-
-import android.os.AsyncTask;
-import android.os.Debug;
-import android.util.Log;
 
 /**
  * Represents an asynchronous login/registration task used to authenticate
@@ -32,17 +31,14 @@ public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 			// TODO : Add data into somewhere
 			System.out.println("UserLoginTask: Login has result!");
 			try{
-				if(resultData.getString("status") != null) {
-					return false;
-				}else if(resultData.getString("status").equals("0")){
-					return false;
-				}else if(resultData.getString("status").equals("1")){
+				if(resultData.getString("status").equals("1")){
 					return true;
 				}
 			
 			Log.e("UserLoginTask", resultData.toString());
-			return true;
-			}catch(JSONException jsex){
+			return false;
+			
+			} catch(JSONException jsex) {
 				DebugLogger.log_e("UserLoginTask", "JSONException : " + jsex.getMessage());
 				return false;				
 			}

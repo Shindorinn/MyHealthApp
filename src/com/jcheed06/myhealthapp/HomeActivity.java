@@ -1,16 +1,12 @@
 package com.jcheed06.myhealthapp;
 
-import com.jcheed06.myhealthapp.login.LoginActivity;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+
+import com.jcheed06.myhealthapp.login.LoginActivity;
 
 public class HomeActivity extends BaseActivity {
 

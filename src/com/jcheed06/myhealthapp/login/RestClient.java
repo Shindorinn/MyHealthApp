@@ -16,13 +16,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.jcheed06.myhealthapp.Registry;
-import com.jcheed06.myhealthapp.tasks.UserLoginTask;
-
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.util.JsonReader;
 import android.util.Log;
+
+import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.tasks.UserLoginTask;
 
 public final class RestClient {
 
