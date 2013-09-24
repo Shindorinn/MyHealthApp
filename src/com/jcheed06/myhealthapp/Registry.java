@@ -28,7 +28,10 @@ public final class Registry extends Activity{
 	public static final int TASK_LOGIN_REQUEST_SUCCESS = 1;
 	public static final int TASK_LOGIN_REQUEST_FAILED  = 2;
 		
-	private Registry(){	}
+	public static final int TAKE_PICTURE_REQUEST = 4;
+	public static final int TAKE_PICTURE_NOT_AVAILABLE = 5;
+	
+	private Registry(){}
 	
 	
 }
