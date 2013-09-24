@@ -10,19 +10,22 @@ import android.widget.Button;
 import com.jcheed06.myhealthapp.login.LoginActivity;
 
 public class HomeActivity extends BaseActivity {
-
-	private Button takeMeasurementButton;
-	private Button viewMeasurementsButton;
-	private Button manageBluetoothDevicesButton;
-	private Button takeAPictureButton;
-	private Button chooseLanguageButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-
-		initializeActivity();
+		
+		Button takeMeasurementsButton = (Button) findViewById(R.id.button_take_measurement);
+		
+		takeMeasurementsButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HomeActivity.this, BluetoothActivity.class);
+				startActivity(intent);
+			}
+		});
 
 //		if(!super.sharedPreferences.getBoolean(BaseActivity.LOGIN_BOOLEAN, false)){ // TODO
 //			goToLoginScreen();
@@ -59,70 +62,6 @@ public class HomeActivity extends BaseActivity {
 		Intent loginScreenIntent = new Intent(this, LoginActivity.class);
 		this.startActivityForResult(loginScreenIntent, Registry.TASK_LOGIN_REQUEST);
 		
-	}
-
-	private void initializeActivity() {
-
-		this.takeMeasurementButton = (Button) this.findViewById(R.id.button_take_measurement);
-		this.viewMeasurementsButton = (Button) this.findViewById(R.id.button_view_measurements);
-		this.manageBluetoothDevicesButton = (Button) this.findViewById(R.id.button_manage_bluetooth_devices);
-		this.takeAPictureButton = (Button) this.findViewById(R.id.button_take_picture);
-		this.chooseLanguageButton = (Button) this.findViewById(R.id.button_choose_language);
-			
-		this.takeMeasurementButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Log.d("health","button clicked!");
-				Intent intent = new Intent(HomeActivity.this, BluetoothActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-		this.viewMeasurementsButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		this.manageBluetoothDevicesButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		this.takeAPictureButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		this.chooseLanguageButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
-		this.takeMeasurementButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 	}
 
 }
