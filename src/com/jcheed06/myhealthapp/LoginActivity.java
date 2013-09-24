@@ -112,7 +112,15 @@ public class LoginActivity extends BaseActivity {
 		        
 		        HttpResponse response = httpclient.execute(httppost);
 		        
-		        JSONObject content = inputStreamToJSON(response.getEntity().getContent());
+		        BufferedReader buffer = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8")); 
+			    StringBuilder sb = new StringBuilder();
+			    String string = "";
+			    while ((string = buffer.readLine()) != null) {
+			    	sb.append(string);
+			    }
+
+			    JSONObject content = new JSONObject(sb.toString());
+		        
 		        Log.e("H2:", "content: " + content.toString());
 		        
 		        // status 1 means user and password where correct, proceed to log in
@@ -142,25 +150,6 @@ public class LoginActivity extends BaseActivity {
 			}
 		}
 		
-		private JSONObject inputStreamToJSON(InputStream is) {
-			String string = "";
-			
-		    try {
-		    	BufferedReader buffer = new BufferedReader(new InputStreamReader(is, "UTF-8")); 
-			    StringBuilder response = new StringBuilder();
-			    
-			    while ((string = buffer.readLine()) != null) {
-			    	response.append(string);
-			    }
-
-			    return new JSONObject(response.toString());
-			    
-		    } catch (Exception e) {
-				e.printStackTrace();
-			}
-		    
-			return null;
-		}
 	}
 	
 	@Override
