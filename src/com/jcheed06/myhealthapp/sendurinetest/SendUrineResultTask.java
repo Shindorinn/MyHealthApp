@@ -14,7 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.jcheed06.myhealthapp.HomeActivity;
+import com.jcheed06.myhealthapp.MainActivity;
 import com.jcheed06.myhealthapp.Registry;
 
 import android.content.Context;
@@ -84,7 +84,7 @@ public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if(success){
-			Intent intent = new Intent(this.context, HomeActivity.class);
+			Intent intent = new Intent(this.context, MainActivity.class);
 			this.context.startActivity(intent);
 		}else{
 			

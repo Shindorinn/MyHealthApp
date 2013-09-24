@@ -17,7 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.jcheed06.myhealthapp.HomeActivity;
+import com.jcheed06.myhealthapp.MainActivity;
 import com.jcheed06.myhealthapp.Registry;
 
 import android.content.Context;
@@ -59,29 +59,11 @@ public class JSONReceiver extends AsyncTask<HashMap<String,String>, Integer, Boo
 
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
-			JsonReader reader = new JsonReader(buffer);
-			StringBuilder object = new StringBuilder();
-			reader.beginObject();
-			String name;
-			while ((name= reader.nextName())!=null){
-				
-			}
-			reader.close();
+
 
 		} catch (Exception e) {
 			Log.e("Exception", e.getMessage());
 		}
 		return false;
-	}
-	
-	@Override
-	protected void onPostExecute(final Boolean success) {
-		if(success){
-			Intent intent = new Intent(this.context, HomeActivity.class);
-			this.context.startActivity(intent);
-		}else{
-			
-		}
-		
 	}
 }
