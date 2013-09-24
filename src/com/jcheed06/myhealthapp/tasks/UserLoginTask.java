@@ -1,6 +1,8 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.tasks;
 
 import org.json.JSONObject;
+
+import com.jcheed06.myhealthapp.login.RestClient;
 
 import android.os.AsyncTask;
 import android.util.Log;

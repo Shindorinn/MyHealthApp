@@ -1,5 +1,7 @@
 package com.jcheed06.myhealthapp;
 
+import com.jcheed06.myhealthapp.login.LoginActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;

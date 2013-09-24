@@ -20,7 +20,7 @@
             
         </activity>
         <activity
-            android:name="com.jcheed06.myhealthapp.LoginActivity"
+            android:name="com.jcheed06.myhealthapp.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>

@@ -1,4 +1,11 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.login;
+
+import com.jcheed06.myhealthapp.R;
+import com.jcheed06.myhealthapp.R.id;
+import com.jcheed06.myhealthapp.R.layout;
+import com.jcheed06.myhealthapp.R.menu;
+import com.jcheed06.myhealthapp.R.string;
+import com.jcheed06.myhealthapp.tasks.UserLoginTask;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

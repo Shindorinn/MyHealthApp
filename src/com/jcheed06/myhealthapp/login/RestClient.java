@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.login;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +18,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+
+import com.jcheed06.myhealthapp.Registry;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
