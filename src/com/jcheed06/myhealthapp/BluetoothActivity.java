@@ -9,7 +9,10 @@ import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class BluetoothActivity extends Activity {
@@ -43,6 +46,24 @@ public class BluetoothActivity extends Activity {
 			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}
 		
+		if(btAdapter.isEnabled()) {
+			checkConnections();
+			discoverConnections();
+		}
+		
+		
+		
+	}
+	
+	private void discoverConnections() {
+		Button discoverBtDevices = (Button) findViewById(R.id.button_discover_bt);
+		discoverBtDevices.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 	}
 	
 	private void checkConnections() {
@@ -54,7 +75,7 @@ public class BluetoothActivity extends Activity {
 		Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
 		if(pairedDevices.size() > 0) {
 			for(BluetoothDevice device : pairedDevices) {
-				
+				arrayAdapter.add(device.getName() + "\n" + device.getAddress());
 			}
 		}
 	}
