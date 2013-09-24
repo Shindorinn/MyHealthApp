@@ -13,6 +13,8 @@ public final class Registry extends Activity{
 	public static final String USERNAME_KEY = "com.jcheed06.Registry.USERNAME_KEY";
 	
 	public static final String LOGIN_COMMAND = "/login";
+	public static final String SEND_URINE_TEST = "/send_urine_test";
+	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
 
 	public static final String REST_CALL_SUCCESS = "success";

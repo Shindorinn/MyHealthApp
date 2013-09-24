@@ -3,7 +3,10 @@ package com.jcheed06.myhealthapp.sendurinetest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,29 +31,26 @@ import android.util.Log;
  * Represents an asynchronous login/registration task used to authenticate the
  * user.
  */
-public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
-	private Context context;
-	
-	public SendUrineResultTask(Context context){
-        this.context = context;
+public class JSONReceiver extends AsyncTask<HashMap<String,String>, Integer, Boolean> {
 
-    }
-	
 	@Override
-	protected Boolean doInBackground(String... parameters) {
+	protected Boolean doInBackground(HashMap<String, String>... parameters) {
+		HashMap<String, String>[] hm = parameters;
+		HashMap<String,String> urlmap = hm[0];
 		HttpClient httpclient = new DefaultHttpClient();
 
-		HttpPost httppost = new HttpPost(Registry.BASE_API_URL
-				+ Registry.SEND_URINE_TEST);
+		HttpPost httppost = new HttpPost(urlmap.get("url"));
 		try {
 
 			Log.e("RestClient", "Adding data");
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-
-			nameValuePairs.add(new BasicNameValuePair("username",
-					"cristianhalman"));
-			nameValuePairs.add(new BasicNameValuePair("password", "password"));
+			
+			HashMap<String, String> namevaluemap = hm[1];
+			for (Map.Entry<String, String> entry : namevaluemap.entrySet()){
+		        nameValuePairs.add(new BasicNameValuePair(entry.getKey(),
+		        		entry.getValue()));
+			}
 
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -60,20 +60,13 @@ public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
 			JsonReader reader = new JsonReader(buffer);
-			JSONObject object = new JSONObject();
+			StringBuilder object = new StringBuilder();
 			reader.beginObject();
-
-			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("status")) {
-					object.put("status", "" + reader.nextInt());
-				}
+			String name;
+			while ((name= reader.nextName())!=null){
+				
 			}
 			reader.close();
-
-			if (object.get("status").equals("1")) {
-				return true;
-			}
 
 		} catch (Exception e) {
 			Log.e("Exception", e.getMessage());
