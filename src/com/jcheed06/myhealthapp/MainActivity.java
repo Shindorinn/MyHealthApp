@@ -1,15 +1,13 @@
 package com.jcheed06.myhealthapp;
 
-import com.jcheed06.myhealthapp.sendurinetest.SendUrineResultTask;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
+import com.jcheed06.myhealthapp.LoginActivity;
 
 public class MainActivity extends BaseActivity {
 	
@@ -19,16 +17,6 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-		
-		Button takePictureButton = (Button) findViewById(R.id.button_take_picture);
-		
-		takePictureButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				new SendUrineResultTask(MainActivity.this).execute();
-			}
-		});
 	}
 
 	@Override
@@ -57,6 +45,16 @@ public class MainActivity extends BaseActivity {
     	spEdit.commit();
 
     	startActivity(new Intent(this, LoginActivity.class));
+    }
+    
+    public void takePicture(View view){
+    	startActivityForResult(new Intent(this, TakePictureActivity.class), Registry.TAKE_PICTURE_REQUEST);				
+
+    }
+    
+    public void manageBluetooth(View view){
+    	startActivity(new Intent(this, BluetoothActivity.class));
+
     }
     
 }

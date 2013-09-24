@@ -12,7 +12,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
 import com.jcheed06.myhealthapp.MainActivity;
 import com.jcheed06.myhealthapp.Registry;
@@ -20,8 +19,6 @@ import com.jcheed06.myhealthapp.Registry;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.sax.StartElementListener;
-import android.util.JsonReader;
 import android.util.Log;
 
 /**
@@ -59,21 +56,7 @@ public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
 
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
-			JsonReader reader = new JsonReader(buffer);
-			JSONObject object = new JSONObject();
-			reader.beginObject();
 
-			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("status")) {
-					object.put("status", "" + reader.nextInt());
-				}
-			}
-			reader.close();
-
-			if (object.get("status").equals("1")) {
-				return true;
-			}
 
 		} catch (Exception e) {
 			Log.e("Exception", e.getMessage());

@@ -9,12 +9,9 @@
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.CAMERA" />
-=======
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA"/>
->>>>>>> origin/takepicture
 
     <application
         android:allowBackup="true"
@@ -40,19 +37,17 @@
             </intent-filter>
         </activity>
         <activity
-<<<<<<< HEAD
             android:name="com.jcheed06.myhealthapp.AboutActivity"
             android:label="@string/title_activity_about" >
         </activity>
+        
 		<activity
-            android:name="com.jcheed06.myhealthapp.TakePictureActivity"
-=======
             android:name="com.jcheed06.myhealthapp.BluetoothActivity"
             android:label="@string/title_activity_bluetooth" >
         </activity>
+        
         <activity
-            android:name="com.jcheed06.myhealthapp.picture.TakePictureActivity"
->>>>>>> origin/takepicture
+            android:name="com.jcheed06.myhealthapp.TakePictureActivity"
             android:label="@string/title_activity_take_picture" >
         </activity>
     </application>
