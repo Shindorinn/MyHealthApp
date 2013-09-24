@@ -4,6 +4,7 @@
     <!-- Global -->
     <string name="app_name">MyHealth</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="action_about">About</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
@@ -27,5 +28,31 @@
     <string name="manage_bluetooth_devices">Manage Bluetooth Devices</string>
     <string name="take_picture">Take Picture</string>
     <string name="choose_language">Choose Language</string>
+=======
+
+    <!-- Titles -->
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_home">MyHealth Home</string>
+
+    <!-- Button Texts -->
+    <string name="button_text_take_measurement">Take Measurement</string>
+    <string name="button_text_view_measurements">View Measurements</string>
+    <string name="button_text_manage_bluetooth_devices">Manage Bluetooth Devices</string>
+    <string name="button_text_take_picture">Take Picture</string>
+    <string name="button_text_choose_language">Choose Language</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="title_activity_take_picture">TakePictureActivity</string>
+    <string name="hello_world">Hello world!</string>
+>>>>>>> 715d20f67fa52826c7db96639332a63da23df45b
 
 </resources>
