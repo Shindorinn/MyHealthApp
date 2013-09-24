@@ -9,7 +9,6 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
-import com.jcheed06.myhealthapp.login.LoginActivity;
 
 public class SettingsActivity extends PreferenceActivity {
 	SharedPreferences sp;

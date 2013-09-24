@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp.login;
+package com.jcheed06.myhealthapp;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -27,10 +27,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jcheed06.myhealthapp.AboutActivity;
-import com.jcheed06.myhealthapp.BaseActivity;
 import com.jcheed06.myhealthapp.R;
-import com.jcheed06.myhealthapp.SettingsActivity;
 
 public class LoginActivity extends BaseActivity {
 

@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.jcheed06.myhealthapp.login.LoginActivity;
 
 public class MainActivity extends BaseActivity {
 	

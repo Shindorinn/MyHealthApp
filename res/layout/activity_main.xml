@@ -44,12 +44,6 @@
 		        android:layout_height="wrap_content"
 		        android:text="@string/take_picture" />
 		
-		    <Button
-		        android:id="@+id/button_choose_language"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/choose_language" />
-		
 	</LinearLayout>
 
 </ScrollView>

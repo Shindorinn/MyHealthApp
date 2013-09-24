@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.jcheed06.myhealthapp.login.LoginActivity;
 
 public class BaseActivity extends Activity {
 	public static final String PREF_NAME = "com.jcheed06.myhealthapp";
