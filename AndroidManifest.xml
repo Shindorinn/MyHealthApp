@@ -7,7 +7,9 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +19,6 @@
         <activity
             android:name="com.jcheed06.myhealthapp.BaseActivity"
             android:label="@string/app_name" >
-            
         </activity>
         <activity
             android:name="com.jcheed06.myhealthapp.login.LoginActivity"
@@ -32,6 +33,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jcheed06.myhealthapp.TakePictureActivity"
+            android:label="@string/title_activity_take_picture" >
         </activity>
     </application>
 
