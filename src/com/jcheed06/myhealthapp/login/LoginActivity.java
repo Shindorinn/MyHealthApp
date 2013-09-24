@@ -123,6 +123,7 @@ public class LoginActivity extends Activity {
 					this.finish();
 				} else {
 					//TODO : Check for the amount of wrong login attempts
+					this.finish();
 				}
 			} catch(InterruptedException ex){
 				Log.e("LoginTask", "InterruptedException : " + ex.getMessage());
