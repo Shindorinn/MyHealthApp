@@ -5,19 +5,17 @@ import android.content.Context;
 
 public final class Registry extends Activity{
 
-<<<<<<< HEAD
-	public static final String BASE_API_URL = "http://10.0.2.2/MyHealthWeb/app";
-=======
-	public static final String BASE_API_URL = "http://omninous.com/app";
->>>>>>> origin/master
-	public static final String URL_KEY = "com.jcheed06.myhealthapp.URL_KEY";
+	public static final String BASE_API_URL = "http://192.168.178.18/MyHealthWeb/app";
+
+	public static final String URL_KEY = "com.jcheed06.myhealthapp.Registry.URL_KEY";
 	
 	public static final String CHARSET = "UTF-8";
 	
-	public static final String USERNAME_KEY = "com.jcheed06.Registry.USERNAME_KEY";
+	public static final String USERNAME_KEY = "com.jcheed06.myhealthapp.Registry.USERNAME_KEY";
 	
 	public static final String LOGIN_COMMAND = "/login";
-	public static final String SEND_URINE_TEST = "/send_urine_test";
+	
+	public static final String SEND_URINE_TEST = "/photo/send";
 	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
 

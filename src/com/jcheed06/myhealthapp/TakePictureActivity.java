@@ -22,7 +22,7 @@ import android.widget.ImageView;
  * http://developer.android.com/training/camera/photobasics.html
  */
 
-public class TakePictureActivity extends Activity {
+public class TakePictureActivity extends BaseActivity {
 
 	Bitmap imageBitmap;
 	ImageView takePictureImageView;
@@ -66,6 +66,10 @@ public class TakePictureActivity extends Activity {
 	private void handleSmallCameraPhoto(Intent intent) {
 	    Bundle extras = intent.getExtras();
 	    imageBitmap = (Bitmap) extras.get("data");
+	    new SendUrineResult(this).execute(new String[]{
+						    				imageBitmap.toString(),
+						    				"Text",
+						    				super.dsp.getString("username", "default")});
 	    takePictureImageView.setImageBitmap(imageBitmap);
 	}
 	

@@ -120,7 +120,7 @@ public class LoginActivity extends BaseActivity {
 			    }
 
 			    JSONObject content = new JSONObject(sb.toString());
-		        
+		        buffer.close();
 		        Log.e("H2:", "content: " + content.toString());
 		        
 		        // status 1 means user and password where correct, proceed to log in

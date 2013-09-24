@@ -1,6 +1,5 @@
 package com.jcheed06.myhealthapp;
 
-import com.jcheed06.myhealthapp.sendurinetest.SendUrineResultTask;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,15 +20,6 @@ public class MainActivity extends BaseActivity {
 		
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		
-		Button takePictureButton = (Button) findViewById(R.id.button_take_picture);
-		
-		takePictureButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				new SendUrineResultTask(MainActivity.this).execute();
-			}
-		});
 	}
 
 	@Override
