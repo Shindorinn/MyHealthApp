@@ -28,5 +28,6 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_take_picture">TakePictureActivity</string>
 
 </resources>
