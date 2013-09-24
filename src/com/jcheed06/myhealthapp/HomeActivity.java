@@ -32,7 +32,6 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
-		Log.d("preference", ""+super.sharedPreferences.getBoolean(Registry.LOGIN_BOOLEAN, false));
 		if(!super.sharedPreferences.getBoolean(Registry.LOGIN_BOOLEAN, false)){ // TODO
 			goToLoginScreen();
 		}

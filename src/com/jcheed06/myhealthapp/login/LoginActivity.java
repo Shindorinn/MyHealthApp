@@ -120,7 +120,6 @@ public class LoginActivity extends Activity {
 					this.setResult(Registry.TASK_LOGIN_REQUEST_SUCCESS); // TODO : Add data!
 					this.sharedDataEditor.putBoolean(Registry.LOGIN_BOOLEAN, true);
 					this.sharedDataEditor.commit();
-					Log.d("preference", ""+sharedData.getBoolean(Registry.LOGIN_BOOLEAN, false));
 					this.finish();
 				} else {
 					//TODO : Check for the amount of wrong login attempts

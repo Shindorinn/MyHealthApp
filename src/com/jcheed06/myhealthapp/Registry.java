@@ -10,6 +10,8 @@ public final class Registry extends Activity{
 	
 	public static final String CHARSET = "UTF-8";
 	
+	public static final String USERNAME_KEY = "com.jcheed06.Registry.USERNAME_KEY";
+	
 	public static final String LOGIN_COMMAND = "/login";
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
 
