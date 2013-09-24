@@ -2,11 +2,8 @@ package com.jcheed06.myhealthapp.tasks;
 
 import org.json.JSONObject;
 
-import com.jcheed06.myhealthapp.HomeActivity;
-import com.jcheed06.myhealthapp.login.LoginActivity;
 import com.jcheed06.myhealthapp.login.RestClient;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,7 +24,7 @@ public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 		Log.e("UserLoginTask", "Password : " + password);
 		
 		RestClient restClient = new RestClient();
-		JSONObject resultData = restClient.login(username, password);
+		JSONObject resultData = restClient.login(username, password, this);
 		if(resultData != null){
 			// TODO : Add data into somewhere
 			System.out.println("UserLoginTask: Login success!");
@@ -38,12 +35,5 @@ public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 			return false;
 		}
 	}
-	
-
-	@Override
-	protected void onPostExecute(final Boolean success) {
-		if(success){
-			Intent intent = new Intent(this, HomeActivity.class);
-		}
-	}
+		
 }

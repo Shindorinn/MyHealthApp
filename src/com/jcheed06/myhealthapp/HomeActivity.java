@@ -25,13 +25,16 @@ public class HomeActivity extends BaseActivity {
 		setContentView(R.layout.activity_home);
 
 		initializeActivity();
+		
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
 
-		if(!super.sharedPreferences.getBoolean(BaseActivity.LOGIN_BOOLEAN, false)){ // TODO
+		if(!super.sharedPreferences.getBoolean(Registry.LOGIN_BOOLEAN, false)){ // TODO
 			goToLoginScreen();
 		}
-		
-		
-		
 	}
 
 

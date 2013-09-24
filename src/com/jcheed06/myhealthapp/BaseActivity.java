@@ -8,18 +8,13 @@ import android.content.SharedPreferences;
 import android.view.Menu;
 
 public class BaseActivity extends Activity {
-
-	public static final String REST_CALL_SUCCESS = "success";
-	
-	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
-
 	protected SharedPreferences sharedPreferences;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.sharedPreferences = this.getPreferences(Context.MODE_PRIVATE);
+		this.sharedPreferences = this.getPreferences(Registry.SHARED_DATA_CONTEXT);
 	}
 
 	@Override

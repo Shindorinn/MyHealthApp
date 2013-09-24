@@ -1,6 +1,7 @@
 package com.jcheed06.myhealthapp;
 
 import android.app.Activity;
+import android.content.Context;
 
 public final class Registry extends Activity{
 
@@ -10,8 +11,14 @@ public final class Registry extends Activity{
 	public static final String CHARSET = "UTF-8";
 	
 	public static final String LOGIN_COMMAND = "/login";
-	
+	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
+
+	public static final String REST_CALL_SUCCESS = "success";
+		
 	public static final String SHARED_DATA_NAME = "com.jcheed06.myhealthapp.Registry.SHARED_DATA_NAME";
+	
+	
+	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
 	
 	public static final int TASK_LOGIN_REQUEST 		   = 0;
 	public static final int TASK_LOGIN_REQUEST_SUCCESS = 1;
