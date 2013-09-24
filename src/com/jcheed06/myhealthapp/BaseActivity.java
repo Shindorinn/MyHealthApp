@@ -1,30 +1,41 @@
 package com.jcheed06.myhealthapp;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
+
 
 public class BaseActivity extends Activity {
-	protected SharedPreferences sharedPreferences;
+	public static final String PREF_NAME = "com.jcheed06.myhealthapp";
 	
+	public SharedPreferences dsp;
+	public SharedPreferences sp;
+	public SharedPreferences.Editor spEdit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.sharedPreferences = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		
+		sp = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+		spEdit = sp.edit();
+		
+		dsp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 	}
 	
 	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState){
-		super.onRestoreInstanceState(savedInstanceState);
+	protected void onResume() {
+		super.onResume();
+		
+		if (sp.getBoolean("loggedIn", false)) {
+//			Toast.makeText(getApplicationContext(), "Welcome back!", Toast.LENGTH_SHORT).show();
+		} else if (sp.getBoolean("inLoginActivity", false)) {
+			Toast.makeText(getApplicationContext(), "Login to continue", Toast.LENGTH_SHORT).show();
+		} else {
+			startActivity(new Intent(this, LoginActivity.class));
+		}
 	}
-	
 }
