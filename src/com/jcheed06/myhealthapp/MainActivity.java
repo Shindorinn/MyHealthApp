@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.jcheed06.myhealthapp.LoginActivity;
 
 public class MainActivity extends BaseActivity {
 	
@@ -57,6 +58,16 @@ public class MainActivity extends BaseActivity {
     	spEdit.commit();
 
     	startActivity(new Intent(this, LoginActivity.class));
+    }
+    
+    public void takePicture(View view){
+    	startActivityForResult(new Intent(this, TakePictureActivity.class), Registry.TAKE_PICTURE_REQUEST);				
+
+    }
+    
+    public void manageBluetooth(View view){
+    	startActivity(new Intent(this, BluetoothActivity.class));
+
     }
     
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -14,6 +15,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+=======
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+>>>>>>> origin/master
 import com.jcheed06.myhealthapp.MainActivity;
 import com.jcheed06.myhealthapp.Registry;
 
@@ -59,6 +71,7 @@ public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
 
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
+<<<<<<< HEAD
 			JsonReader reader = new JsonReader(buffer);
 			JSONObject object = new JSONObject();
 			reader.beginObject();
@@ -74,6 +87,9 @@ public class SendUrineResultTask extends AsyncTask<String, Integer, Boolean> {
 			if (object.get("status").equals("1")) {
 				return true;
 			}
+=======
+
+>>>>>>> origin/master
 
 		} catch (Exception e) {
 			Log.e("Exception", e.getMessage());
