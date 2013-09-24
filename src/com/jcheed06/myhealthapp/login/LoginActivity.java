@@ -15,6 +15,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
@@ -116,8 +117,10 @@ public class LoginActivity extends Activity {
 			try{
 				Log.e("LoginActivity", "loginTask.get() : " + loginTask.get());
 				if(loginTask.get()){
-					this.setResult(Registry.TASK_LOGIN_REQUEST_SUCCESS, null); // TODO : Add data!
+					this.setResult(Registry.TASK_LOGIN_REQUEST_SUCCESS); // TODO : Add data!
 					this.sharedDataEditor.putBoolean(Registry.LOGIN_BOOLEAN, true);
+					this.sharedDataEditor.commit();
+					Log.d("preference", ""+sharedData.getBoolean(Registry.LOGIN_BOOLEAN, false));
 					this.finish();
 				} else {
 					//TODO : Check for the amount of wrong login attempts

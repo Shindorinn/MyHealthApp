@@ -13,9 +13,6 @@ public class SendUrineResultTask extends AsyncTask<String, Void, Boolean> {
 	
 	@Override
 	protected Boolean doInBackground(String... parameters) {
-		
-		
-		
 		SendUrineTestRestClient restClient = new SendUrineTestRestClient();
 		JSONObject resultData = restClient.sendTest(null, null);
 		

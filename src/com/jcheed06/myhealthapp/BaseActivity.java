@@ -14,7 +14,7 @@ public class BaseActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.sharedPreferences = this.getPreferences(Registry.SHARED_DATA_CONTEXT);
+		this.sharedPreferences = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
 	}
 
 	@Override

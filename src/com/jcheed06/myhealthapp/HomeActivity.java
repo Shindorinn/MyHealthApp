@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class HomeActivity extends BaseActivity {
 	@Override
 	protected void onResume(){
 		super.onResume();
-
+		Log.d("preference", ""+super.sharedPreferences.getBoolean(Registry.LOGIN_BOOLEAN, false));
 		if(!super.sharedPreferences.getBoolean(Registry.LOGIN_BOOLEAN, false)){ // TODO
 			goToLoginScreen();
 		}
@@ -51,12 +52,10 @@ public class HomeActivity extends BaseActivity {
 		
 		switch(requestCode){
 		case Registry.TASK_LOGIN_REQUEST :
-			if(resultCode == Registry.TASK_LOGIN_REQUEST_SUCCESS){
-				
-			}else if(resultCode == Registry.TASK_LOGIN_REQUEST_FAILED){
+			if(resultCode == Registry.TASK_LOGIN_REQUEST_FAILED){
 				goToLoginScreen();
 			}
-		
+			break;
 		}
 	}
 	
