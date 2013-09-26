@@ -66,10 +66,7 @@ public class TakePictureActivity extends BaseActivity {
 	private void handleSmallCameraPhoto(Intent intent) {
 	    Bundle extras = intent.getExtras();
 	    imageBitmap = (Bitmap) extras.get("data");
-	    new SendUrineResult(this).execute(new String[]{
-						    				imageBitmap.toString(),
-						    				"Text",
-						    				super.dsp.getString("username", "default")});
+	    new SendUrineResult(this).execute(new UrineTestData(imageBitmap, "Text", super.sp));
 	    takePictureImageView.setImageBitmap(imageBitmap);
 	}
 	
