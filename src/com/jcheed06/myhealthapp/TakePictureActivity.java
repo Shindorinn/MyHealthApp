@@ -58,10 +58,11 @@ public class TakePictureActivity extends BaseActivity {
 		switch (requestCode) {
 		case Registry.TAKE_PICTURE_REQUEST:
 			if (resultCode == Activity.RESULT_OK) {
-				imageFile = getImageFile();
+				Log.d("asdf"," " + imageFile);
 				dispatchTakePictureIntent(Registry.TAKE_PICTURE_REQUEST,
 						imageFile);
-				handleSmallCameraPhoto(data);
+				setPic();
+				finish();
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				DebugLogger.log_wtf("TakePictureActivity",
 						"Activity result CANCELLED!");
@@ -75,8 +76,6 @@ public class TakePictureActivity extends BaseActivity {
 		Bundle extras = intent.getExtras();
 		Log.d("DATA", " " + extras.get("data"));
 		imageBitmap = (Bitmap) extras.get("data");
-		new SendUrineResult(this).execute(new UrineTestData(imageBitmap,
-				"Text", super.sp));
 		takePictureImageView.setImageBitmap(imageBitmap);
 	}
 
@@ -84,6 +83,7 @@ public class TakePictureActivity extends BaseActivity {
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 				.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
 		if (isIntentAvailable(this, MediaStore.ACTION_IMAGE_CAPTURE)) {
+			Log.d("requestCode", ""+requestCode);
 			this.startActivityForResult(takePictureIntent, requestCode);
 		} else {
 			this.setResult(Registry.TAKE_PICTURE_NOT_AVAILABLE);
@@ -91,16 +91,14 @@ public class TakePictureActivity extends BaseActivity {
 		}
 	}
 
-	private void setPic() throws IOException {
+	private void setPic(){
 
 		int targetW = this.takePictureImageView.getWidth();
 		int targetH = this.takePictureImageView.getHeight();
 
-		File f = getImageFile();
-
 		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 		bmOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(f.getAbsolutePath(), bmOptions);
+		BitmapFactory.decodeFile(imageFile.getAbsolutePath(), bmOptions);
 		int photoW = bmOptions.outWidth;
 		int photoH = bmOptions.outHeight;
 
@@ -113,10 +111,14 @@ public class TakePictureActivity extends BaseActivity {
 		bmOptions.inSampleSize = scaleFactor;
 		bmOptions.inPurgeable = true;
 
-		Bitmap bitmap = BitmapFactory
-				.decodeFile(f.getAbsolutePath(), bmOptions);
-
-		takePictureImageView.setImageBitmap(bitmap);
+		this.imageBitmap = BitmapFactory
+				.decodeFile(imageFile.getAbsolutePath(), bmOptions);
+		
+		Log.d("bitmap", ""+ imageFile.getAbsolutePath());
+		
+		new SendUrineResult(this).execute(new UrineTestData(imageBitmap,
+				"Text", super.sp));
+		takePictureImageView.setImageBitmap(imageBitmap);
 		takePictureImageView.setVisibility(View.VISIBLE);
 		takePictureImageView.setVisibility(View.INVISIBLE);
 	}
@@ -126,7 +128,7 @@ public class TakePictureActivity extends BaseActivity {
 			try {
 				imageFile = File.createTempFile("tempfile", ".jpg");
 			} catch (IOException e) {
-				return null;
+				Log.d("FOUT", "asdfasdfasdfasdfasd");
 			}
 		}
 		return imageFile;
