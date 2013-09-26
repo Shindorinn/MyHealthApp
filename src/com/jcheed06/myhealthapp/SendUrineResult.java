@@ -18,10 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.sax.StartElementListener;
-import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -52,6 +49,7 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			this.picture = result.getPhoto();
+			
 			nameValuePairs
 			.add(new BasicNameValuePair("picture", result.getPhoto()));
 			nameValuePairs

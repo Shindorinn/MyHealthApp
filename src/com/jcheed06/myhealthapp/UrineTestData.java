@@ -21,7 +21,7 @@ public class UrineTestData {
 	
 	public String getPhoto() {         
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        this.photo.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
+        this.photo.compress(Bitmap.CompressFormat.JPEG, 90, stream); //compress to which format you want.
         byte [] byte_arr = stream.toByteArray();
         String image_str = Base64.encodeToString(byte_arr,Base64.DEFAULT);
 		return image_str;
