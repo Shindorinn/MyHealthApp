@@ -1,8 +1,13 @@
 package com.jcheed06.myhealthapp;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.jcheed06.myhealthapp.R;
@@ -11,6 +16,7 @@ import com.jcheed06.myhealthapp.R.menu;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
@@ -33,7 +39,7 @@ public class TakePictureActivity extends BaseActivity {
 
 	Bitmap imageBitmap;
 	ImageView takePictureImageView;
-	private File imageFile;
+	File imageFile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +64,9 @@ public class TakePictureActivity extends BaseActivity {
 		switch (requestCode) {
 		case Registry.TAKE_PICTURE_REQUEST:
 			if (resultCode == Activity.RESULT_OK) {
-				Log.d("asdf"," " + imageFile);
 				dispatchTakePictureIntent(Registry.TAKE_PICTURE_REQUEST,
 						imageFile);
-				setPic();
+				setPic(imageFile);
 				finish();
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				DebugLogger.log_wtf("TakePictureActivity",
@@ -91,45 +96,44 @@ public class TakePictureActivity extends BaseActivity {
 		}
 	}
 
-	private void setPic(){
+	private void setPic(File file){
 
-		int targetW = this.takePictureImageView.getWidth();
-		int targetH = this.takePictureImageView.getHeight();
+//		int targetW = this.takePictureImageView.getWidth();
+//		int targetH = this.takePictureImageView.getHeight();
 
 		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 		bmOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(imageFile.getAbsolutePath(), bmOptions);
-		int photoW = bmOptions.outWidth;
-		int photoH = bmOptions.outHeight;
-
-		int scaleFactor = 1;
-		if ((targetW > 0) || (targetH > 0)) {
-			scaleFactor = Math.min(photoW / targetW, photoH / targetH);
-		}
-
-		bmOptions.inJustDecodeBounds = false;
-		bmOptions.inSampleSize = scaleFactor;
-		bmOptions.inPurgeable = true;
-
-		this.imageBitmap = BitmapFactory
-				.decodeFile(imageFile.getAbsolutePath(), bmOptions);
+//		int photoW = bmOptions.outWidth;
+//		int photoH = bmOptions.outHeight;
+//
+//		int scaleFactor = 1;
+//		if ((targetW > 0) || (targetH > 0)) {
+//			scaleFactor = Math.min(photoW / targetW, photoH / targetH);
+//		}
+//
+//		bmOptions.inJustDecodeBounds = false;
+//		bmOptions.inSampleSize = scaleFactor;
+//		bmOptions.inPurgeable = true;
 		
-		Log.d("bitmap", ""+ imageFile.getAbsolutePath());
-		
+		imageBitmap = BitmapFactory.decodeFile(file.getAbsolutePath(),bmOptions);
 		new SendUrineResult(this).execute(new UrineTestData(imageBitmap,
 				"Text", super.sp));
+		
 		takePictureImageView.setImageBitmap(imageBitmap);
 		takePictureImageView.setVisibility(View.VISIBLE);
 		takePictureImageView.setVisibility(View.INVISIBLE);
 	}
 
 	private File getImageFile() {
+		  String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+		  String imageFileName = "IMG_" + timeStamp + "_";
+		  File albumF = Environment.get;
+		  File imageF = File.createTempFile(imageFileName, JPEG_FILE_SUFFIX, albumF);
+		
+		
 		if (imageFile == null) {
-			try {
-				imageFile = File.createTempFile("tempfile", ".jpg");
-			} catch (IOException e) {
-				Log.d("FOUT", "asdfasdfasdfasdfasd");
-			}
+				imageFile = File.createTempFile("IMG_tempfile" +  new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()), ".jpeg", "tempMyHealth");
+
 		}
 		return imageFile;
 	}
