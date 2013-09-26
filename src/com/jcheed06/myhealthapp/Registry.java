@@ -5,7 +5,7 @@ import android.content.Context;
 
 public final class Registry extends Activity{
 
-	public static final String BASE_API_URL = "http://10.0.2.2/MyHealthWeb/app";
+	public static final String BASE_API_URL = "http://145.37.70.126/MyHealthWeb/app";
 
 	public static final String URL_KEY = "com.jcheed06.myhealthapp.Registry.URL_KEY";
 	
