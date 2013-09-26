@@ -48,7 +48,6 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 				+ Registry.SEND_URINE_TEST);
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			this.picture = result.getPhoto();
 			
 			nameValuePairs
 			.add(new BasicNameValuePair("picture", result.getPhoto()));
@@ -71,7 +70,6 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 			}
 			
 			JSONObject content = new JSONObject(sb.toString());
-			
 			if(content.get("status").equals("1")){
 				return true;
 			}
@@ -79,11 +77,9 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 			buffer.close();
 			
 		} catch (JSONException e) {
-			Log.e("JSONException", e.getMessage());
-		} catch (ClientProtocolException e) {
-			Log.e("ClientProtocolException ", e.getMessage());
+			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("IOException ", e.getMessage());
+			e.printStackTrace();
 		}
 		return false;
 	}

@@ -62,19 +62,15 @@ public class TakePictureActivity extends BaseActivity {
 	}
 	
 	private void handleSmallCameraPhoto(Intent intent) {
-	    Bundle extras = intent.getExtras();
 	    try {
 			InputStream stream = getContentResolver().openInputStream(intent.getData());
 			Bitmap bitmap = BitmapFactory.decodeStream(stream);
-			new SendUrineResult(this).execute(new UrineTestData(bitmap,
-					"Text", super.sp));
-			
+			UrineTestData result = new UrineTestData(bitmap, "message", super.sp);
+			new SendUrineResult(this).execute(result);
 			takePictureImageView.setImageBitmap(bitmap);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-//	   	new SendUrineResult(this).execute(new UrineTestData(imageBitmap, "Text", super.sp));
-//	    takePictureImageView.setImageBitmap(imageBitmap);
 	}
 	
 	private void dispatchTakePictureIntent(int requestCode) {
