@@ -1,7 +1,6 @@
 package com.jcheed06.myhealthapp;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,13 +27,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jcheed06.myhealthapp.R;
-
 public class LoginActivity extends BaseActivity {
 
 	String username = "";
 	String password = "";
 	int incorrectLogins = 0;
+	private ProgressDialog dialogWait;
+	private final String defaultURL = "http://localhost/MyHealthWeb"; // http://myhealth.omninous.com
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,8 @@ public class LoginActivity extends BaseActivity {
 		
 		UserLogin userLogin = new UserLogin();
 		userLogin.execute((Void) null);
+		
+		dialogWait = ProgressDialog.show(this, "", "Please wait...", true);
 	}
 	
 	public class UserLogin extends AsyncTask<Void, Void, Boolean> {
@@ -101,7 +103,7 @@ public class LoginActivity extends BaseActivity {
 			// Create a new HttpClient and Post Header
 		    HttpClient httpclient = new DefaultHttpClient();
 		    
-		    HttpPost httppost = new HttpPost("http://myhealth.omninous.com/app/login");
+		    HttpPost httppost = new HttpPost(defaultURL + "/app/login");
 
 		    try {
 		        // Add your data
@@ -123,17 +125,35 @@ public class LoginActivity extends BaseActivity {
 		        buffer.close();
 		        Log.e("H2:", "content: " + content.toString());
 		        
-		        // status 1 means user and password where correct, proceed to log in
 		        if (content.get("status").toString().equals("1")) {
+		        	
+		        } else if (content.get("status").toString().equals("1")) {
 		        	spEdit.putBoolean("loggedIn", true);
 		        	spEdit.putString("id", (String) content.get("id"));
 		        	spEdit.putString("username", username);
 		        	spEdit.commit();
-		        	
+		        	incorrectLogins = 0;
+		        	Log.e("L1:", "Login ok");
 		        	return true;
-		        } else {
-		        	return false;
+		        } else if (content.get("status").toString().equals("0")) {
+		        	Log.e("L2:", "Login NOT ok");
+		        	if (incorrectLogins < 2) {
+		        		incorrectLogins++;
+		        		Log.e("L3:", "incorrectLogins: " + incorrectLogins);
+					} else {
+						Log.e("L4:", "Block user");
+						// block user
+						httppost = new HttpPost(defaultURL + "/app/block");
+						nameValuePairs = new ArrayList<NameValuePair>(2);
+				        nameValuePairs.add(new BasicNameValuePair("username", username));
+				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+				        httpclient.execute(httppost);
+				        Log.e("L5:", "User has been blocked!");
+				        incorrectLogins = 0;
+					}
 		        }
+		        
+		        return false;
 		    } catch (Exception e) {
 		    	Log.e("H3:", e.toString());
 		    	return false;
@@ -142,6 +162,8 @@ public class LoginActivity extends BaseActivity {
 		
 		@Override
 		protected void onPostExecute(final Boolean success) {
+			dialogWait.dismiss();
+			
 			if (success) {
 				Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_LONG).show();
 				finish();
