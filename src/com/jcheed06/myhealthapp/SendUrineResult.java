@@ -69,7 +69,6 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 			String r = "";
 			
 			while ((r = buffer.readLine()) != null) {
-				Log.d("OUTPUT", r);
 				sb.append(r);
 			}
 			

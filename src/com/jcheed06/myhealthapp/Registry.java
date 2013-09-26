@@ -3,7 +3,7 @@ package com.jcheed06.myhealthapp;
 import android.app.Activity;
 import android.content.Context;
 
-public final class Registry {
+public final class Registry extends Activity{
 
 	public static final String BASE_API_URL = "http://10.0.2.2/MyHealthWeb/app";
 
