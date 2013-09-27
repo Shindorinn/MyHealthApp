@@ -102,7 +102,7 @@ public class LoginActivity extends BaseActivity {
 			// Create a new HttpClient and Post Header
 		    HttpClient httpclient = new DefaultHttpClient();
 		    
-		    HttpPost httppost = new HttpPost(Registry.BASE_API_URL + "/app/login");
+		    HttpPost httppost = new HttpPost(Registry.BASE_API_URL + Registry.LOGIN_COMMAND);
 
 		    try {
 		        // Add your data
@@ -142,7 +142,7 @@ public class LoginActivity extends BaseActivity {
 					} else {
 						Log.e("L4:", "Block user");
 						// block user
-						httppost = new HttpPost(Registry.BASE_API_URL + "/app/block");
+						httppost = new HttpPost(Registry.BASE_API_URL + "/block");
 						nameValuePairs = new ArrayList<NameValuePair>(2);
 				        nameValuePairs.add(new BasicNameValuePair("username", username));
 				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
