@@ -33,7 +33,6 @@ public class LoginActivity extends BaseActivity {
 	String password = "";
 	int incorrectLogins = 0;
 	private ProgressDialog dialogWait;
-	private final String defaultURL = "http://localhost/MyHealthWeb"; // http://myhealth.omninous.com
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +102,7 @@ public class LoginActivity extends BaseActivity {
 			// Create a new HttpClient and Post Header
 		    HttpClient httpclient = new DefaultHttpClient();
 		    
-		    HttpPost httppost = new HttpPost(defaultURL + "/app/login");
+		    HttpPost httppost = new HttpPost(Registry.BASE_API_URL + "/app/login");
 
 		    try {
 		        // Add your data
@@ -143,7 +142,7 @@ public class LoginActivity extends BaseActivity {
 					} else {
 						Log.e("L4:", "Block user");
 						// block user
-						httppost = new HttpPost(defaultURL + "/app/block");
+						httppost = new HttpPost(Registry.BASE_API_URL + "/app/block");
 						nameValuePairs = new ArrayList<NameValuePair>(2);
 				        nameValuePairs.add(new BasicNameValuePair("username", username));
 				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
