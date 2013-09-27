@@ -188,4 +188,8 @@ public class LoginActivity extends BaseActivity {
 		
 		super.onPause();
 	}
+	
+	public int getIncorrectLogins() {
+		return incorrectLogins;
+	}
 }
