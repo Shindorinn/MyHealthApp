@@ -1,5 +1,7 @@
 package com.jcheed06.myhealthapp;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import com.jcheed06.myhealthapp.R;
@@ -14,6 +16,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
@@ -44,33 +48,29 @@ public class TakePictureActivity extends BaseActivity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		
-		handleSmallCameraPhoto(data);
-//		switch(requestCode){
-//		case Registry.TAKE_PICTURE_REQUEST :
-//			if(resultCode == Activity.RESULT_OK){
-//				handleSmallCameraPhoto(data);
-//			}else if(resultCode == Activity.RESULT_CANCELED){
-//				DebugLogger.log_wtf("TakePictureActivity", "Activity result CANCELLED!");
-//			}
-//		break;
-//		
-//		
-//		default : 
-//			//TODO : Show error that taking a picture failed.
-//			break;
-//		}
+		Log.d("RESULT", " "+resultCode);
+		switch(requestCode){
+		case Registry.TAKE_PICTURE_REQUEST :
+			if(resultCode == Activity.RESULT_OK){
+				handleSmallCameraPhoto(data);
+			}else if(resultCode == Activity.RESULT_CANCELED){
+				DebugLogger.log_wtf("TakePictureActivity", "Activity result CANCELLED!");
+			}
+		break;
+		}
 		
 	}
 	
 	private void handleSmallCameraPhoto(Intent intent) {
-	    Bundle extras = intent.getExtras();
-	    imageBitmap = (Bitmap) extras.get("data");
-	    new SendUrineResult(this).execute(new String[]{
-						    				imageBitmap.toString(),
-						    				"Text",
-						    				super.dsp.getString("username", "default")});
-	    takePictureImageView.setImageBitmap(imageBitmap);
+	    try {
+			InputStream stream = getContentResolver().openInputStream(intent.getData());
+			Bitmap bitmap = BitmapFactory.decodeStream(stream);
+			UrineTestData result = new UrineTestData(bitmap, "message", super.sp);
+			new SendUrineResult(this).execute(result);
+			takePictureImageView.setImageBitmap(bitmap);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void dispatchTakePictureIntent(int requestCode) {

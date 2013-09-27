@@ -18,43 +18,43 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.sax.StartElementListener;
-import android.util.JsonReader;
 import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Represents an asynchronous login/registration task used to authenticate the
- * user.
+ * An asynchronous task to send the result of a processed urine test
  */
-public class SendUrineResult extends AsyncTask<String, Integer, Boolean> {
-	private String username,photo,message;
+public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> {
 	
 	private Context context;
+	private String picture;
+	
 	public SendUrineResult(Context context){
 		this.context = context;
 	}
+	
 	/**
 	 * Parameter 0 = photo Parameter 1 = message Parameter 2 = username
 	 */
 	@Override
-	protected Boolean doInBackground(String... parameters) {
-		this.username=parameters[2];
-		this.message=parameters[1];
-		this.photo=parameters[0];
+	protected Boolean doInBackground(UrineTestData... parameters) {
+		
+		UrineTestData result = parameters[0];
+		
 		HttpClient httpclient = new DefaultHttpClient();
 
 		HttpPost httppost = new HttpPost(Registry.BASE_API_URL
 				+ Registry.SEND_URINE_TEST);
 		try {
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("picture", photo));
+			
 			nameValuePairs
-					.add(new BasicNameValuePair("message", message));
+			.add(new BasicNameValuePair("picture", result.getPhoto()));
 			nameValuePairs
-					.add(new BasicNameValuePair("username", username));
+					.add(new BasicNameValuePair("message", result.getMessage()));
+			nameValuePairs
+					.add(new BasicNameValuePair("username", result.getUsername()));
 
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -70,7 +70,6 @@ public class SendUrineResult extends AsyncTask<String, Integer, Boolean> {
 			}
 			
 			JSONObject content = new JSONObject(sb.toString());
-			
 			if(content.get("status").equals("1")){
 				return true;
 			}
@@ -78,11 +77,9 @@ public class SendUrineResult extends AsyncTask<String, Integer, Boolean> {
 			buffer.close();
 			
 		} catch (JSONException e) {
-			Log.e("JSONException", e.getMessage());
-		} catch (ClientProtocolException e) {
-			Log.e("ClientProtocolException ", e.getMessage());
+			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e("IOException ", e.getMessage());
+			e.printStackTrace();
 		}
 		return false;
 	}
@@ -90,9 +87,10 @@ public class SendUrineResult extends AsyncTask<String, Integer, Boolean> {
 	@Override
 	protected void onPostExecute(final Boolean success) {
 		if (success) {
-			Toast.makeText(context, photo + username + message, Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "succes", Toast.LENGTH_LONG).show();
 		}else{
-			Toast.makeText(context, photo + username + message + "Error sending photo", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Error sending photo", Toast.LENGTH_LONG).show();
 		}
 	}
+
 }
