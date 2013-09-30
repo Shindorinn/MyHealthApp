@@ -4,7 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -271,6 +278,19 @@ public class BluetoothActivity extends Activity {
 		}
 	}
 	
-	
+	private class SendMeasurement extends AsyncTask<Void, Void, Boolean> {
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			HttpClient httpclient = new DefaultHttpClient();
+		    
+		    HttpPost httppost = new HttpPost(Registry.BASE_API_URL + Registry.SEND_MEASUREMENT_COMMAND);
+		    
+		    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		    
+		    return null;
+		}
+		
+	}
 
 }
