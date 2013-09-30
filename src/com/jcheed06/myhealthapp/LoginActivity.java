@@ -91,13 +91,12 @@ public class LoginActivity extends BaseActivity {
     	
 		Log.e("H1:", username + ":" + password);
 		
-		UserLogin userLogin = new UserLogin();
-		userLogin.execute((Void) null);
+		new UserLogin().execute((Void) null);
 		
 		dialogWait = ProgressDialog.show(this, "", "Please wait...", true);
 	}
 	
-	public class UserLogin extends AsyncTask<Void, Void, Boolean> {
+	private class UserLogin extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// Create a new HttpClient and Post Header
