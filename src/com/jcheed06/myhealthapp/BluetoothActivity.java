@@ -156,8 +156,6 @@ public class BluetoothActivity extends Activity {
 		public void run() {
 			btAdapter.cancelDiscovery();
 
-			Log.e("health", "At least I'm trying to connect!");
-
 			try {
 				socket.connect();
 				new ConnectedThread(socket).start();
@@ -209,6 +207,11 @@ public class BluetoothActivity extends Activity {
 		public void run() {
 
 			Log.e("health", "ik zit in run van ConnectedThread.");
+			
+			String whichMeasurement = "pulsewaves";
+			
+			byte[] sendWhichMeasurement = whichMeasurement.getBytes();
+			write(sendWhichMeasurement);
 
 			while (true) {
 
@@ -250,7 +253,12 @@ public class BluetoothActivity extends Activity {
 		}
 
 		public void write(byte[] bytes) {
-
+			try {
+				os.write(bytes);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		public void cancel() {
