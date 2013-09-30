@@ -15,8 +15,6 @@ public final class Registry extends Activity{
 	
 	public static final String LOGIN_COMMAND = "/login";
 	
-	public static final String SEND_MEASUREMENT_COMMAND = "/measurement";
-	
 	public static final String SEND_URINE_TEST = "/photo/send";
 	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";
