@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity {
 		dialogWait = ProgressDialog.show(this, "", "Please wait...", true);
 	}
 	
-	private class UserLogin extends AsyncTask<Void, Void, Boolean> {
+	public class UserLogin extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			// Create a new HttpClient and Post Header
