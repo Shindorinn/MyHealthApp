@@ -96,7 +96,7 @@ public class BluetoothActivity extends Activity {
 			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		}
 
-		final BroadcastReceiver receiver = new BroadcastReceiver() {
+		receiver = new BroadcastReceiver() {
 			public void onReceive(Context context, Intent intent) {
 				String action = intent.getAction();
 				if (BluetoothDevice.ACTION_FOUND.equals(action)) {
@@ -118,8 +118,12 @@ public class BluetoothActivity extends Activity {
 	@Override
 	protected void onStop() {
 		super.onStop();
-
+		
+		try {
 		unregisterReceiver(receiver);
+		} catch (IllegalArgumentException e) {
+			Log.e("myhealth","Unregistering the receiver!");
+		}
 	}
 
 	private void discoverConnections() {
