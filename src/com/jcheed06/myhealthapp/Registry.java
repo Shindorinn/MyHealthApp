@@ -23,6 +23,7 @@ public final class Registry extends Activity{
 		
 	public static final String SHARED_DATA_NAME = "com.jcheed06.myhealthapp.Registry.SHARED_DATA_NAME";
 	
+	public static final String SEND_MEASUREMENT_COMMAND = "/measurement";
 	
 	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
 	

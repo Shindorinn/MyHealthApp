@@ -4,7 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -109,8 +116,8 @@ public class BluetoothActivity extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onStop() {
+		super.onStop();
 
 		unregisterReceiver(receiver);
 	}
@@ -133,6 +140,21 @@ public class BluetoothActivity extends Activity {
 				}
 			}
 		});
+	}
+
+	private class SendMeasurement extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			HttpClient httpclient = new DefaultHttpClient();
+
+			HttpPost httppost = new HttpPost(Registry.BASE_API_URL
+					+ Registry.SEND_MEASUREMENT_COMMAND);
+
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+			return null;
+		}
+
 	}
 
 	private class ConnectThread extends Thread {
@@ -185,6 +207,8 @@ public class BluetoothActivity extends Activity {
 		private final BluetoothSocket socket;
 		private final InputStream is;
 		private final OutputStream os;
+		private ArrayList<Integer> FirstMeasurementValues = new ArrayList<Integer>();
+		private int FirstValueToSend;
 
 		public ConnectedThread(BluetoothSocket socket) {
 			this.socket = socket;
@@ -207,9 +231,9 @@ public class BluetoothActivity extends Activity {
 		public void run() {
 
 			Log.e("health", "ik zit in run van ConnectedThread.");
-			
+
 			String whichMeasurement = "pulsewaves";
-			
+
 			byte[] sendWhichMeasurement = whichMeasurement.getBytes();
 			write(sendWhichMeasurement);
 
@@ -228,9 +252,19 @@ public class BluetoothActivity extends Activity {
 
 						is.read(buffer);
 
-						String teststring = new String(buffer);
+						String message = new String(buffer);
 
-						Log.e("received", "Message received! " + teststring);
+						String[] partsOfMessage = message.split(";");
+
+						if (partsOfMessage[0].equals("pulse")) {
+							startPulseMeasurement(partsOfMessage[1]);
+						} else if (partsOfMessage[0].equals("ecg")) {
+							startECGMeasurement(partsOfMessage[1]);
+						} else if (partsOfMessage[0].equals("bloodpressure")) {
+							startBloodPressureMeasurement(partsOfMessage[1]);
+						}
+						
+						Log.e("received", "Message received! " + message);
 					}
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
@@ -239,17 +273,31 @@ public class BluetoothActivity extends Activity {
 
 			}
 
-			// while(true) {
-			// try {
-			// bytes = is.read(buffer);
-			//
-			// handler.obtainMessage().sendToTarget();
-			// } catch (IOException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
-			// }
+		}
 
+		private void startPulseMeasurement(String Message) {
+			if(!Message.equals("stop")) {
+				FirstMeasurementValues.add(Integer.parseInt(Message));
+			} else {
+				int tempInt = 0;
+				for(int i = 0; i < FirstMeasurementValues.size(); i++) {
+					 tempInt += FirstMeasurementValues.get(i);
+				}
+				FirstValueToSend = (tempInt / FirstMeasurementValues.size());
+				Log.e("First Value to Send: ", "" + FirstValueToSend);
+			}
+		}
+
+		private void startECGMeasurement(String Message) {
+			if(!Message.equals("stop")) {
+				
+			}
+		}
+
+		private void startBloodPressureMeasurement(String Message) {
+			if(!Message.equals("stop")) {
+				
+			}
 		}
 
 		public void write(byte[] bytes) {
@@ -262,7 +310,12 @@ public class BluetoothActivity extends Activity {
 		}
 
 		public void cancel() {
-
+			try {
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
