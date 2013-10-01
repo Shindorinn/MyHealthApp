@@ -124,7 +124,7 @@ public class LoginActivity extends BaseActivity {
 			    JSONObject content = new JSONObject(sb.toString());
 		        buffer.close();
 		        Log.e("H2:", "content: " + content.toString());
-		        
+		        View focusView = null;
 		        if (content.get("status").toString().equals("1")) {
 		        	spEdit.putBoolean("loggedIn", true);
 		        	spEdit.putString("id", (String) content.get("id"));
@@ -135,6 +135,9 @@ public class LoginActivity extends BaseActivity {
 		        	return true;
 		        } else if (content.get("status").toString().equals("9")) {
 		        	Log.e("L2:", "Login NOT ok");
+		        	editPassword.setError(getString(R.string.blocked_from_app));
+		        	focusView = editPassword;
+		        	focusView.requestFocus();
 		        	return false;
 		        }
 		        
