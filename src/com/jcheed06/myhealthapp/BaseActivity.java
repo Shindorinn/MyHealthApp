@@ -35,7 +35,7 @@ public class BaseActivity extends Activity {
 		} else if (sp.getBoolean("inLoginActivity", false)) {
 			Toast.makeText(getApplicationContext(), "Login to continue", Toast.LENGTH_SHORT).show();
 		} else {
-			startActivity(new Intent(this, LoginActivity.class));
+//			startActivity(new Intent(this, LoginActivity.class));
 		}
 	}
 }
