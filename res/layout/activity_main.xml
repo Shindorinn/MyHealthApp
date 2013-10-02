@@ -30,7 +30,8 @@
 		        android:id="@+id/button_view_measurements"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="@string/view_measurements" />
+		        android:text="@string/view_measurements"
+		        android:onClick="viewMeasurements" />
 		    
 		    <Button
 		        android:id="@+id/button_manage_bluetooth_devices"
