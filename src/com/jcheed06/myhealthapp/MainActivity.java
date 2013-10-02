@@ -1,6 +1,8 @@
 package com.jcheed06.myhealthapp;
 
 
+import com.jcheed06.myhealthapp.measurement.ViewMeasurementsActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -57,4 +59,7 @@ public class MainActivity extends BaseActivity {
 
     }
     
+    public void viewMeasurements(View view){
+    	startActivityForResult(new Intent(this, ViewMeasurementsActivity.class), Registry.VIEW_MEASUREMENTS_REQUEST);
+    }
 }

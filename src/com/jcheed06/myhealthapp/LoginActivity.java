@@ -31,6 +31,7 @@ public class LoginActivity extends BaseActivity {
 
 	String username = "";
 	String password = "";
+	private EditText editPassword;
 	int incorrectLogins = 0;
 	private ProgressDialog dialogWait;
 	
@@ -85,7 +86,7 @@ public class LoginActivity extends BaseActivity {
 	private void attemptLogin() {
 		EditText editUsername = (EditText)findViewById(R.id.username);
     	username = editUsername.getText().toString();
-    	EditText editPassword = (EditText)findViewById(R.id.password);
+    	editPassword = (EditText)findViewById(R.id.password);
     	password = editPassword.getText().toString();
     	
 		Log.e("H1:", username + ":" + password);
@@ -123,10 +124,8 @@ public class LoginActivity extends BaseActivity {
 			    JSONObject content = new JSONObject(sb.toString());
 		        buffer.close();
 		        Log.e("H2:", "content: " + content.toString());
-		        
+		        View focusView = null;
 		        if (content.get("status").toString().equals("1")) {
-		        	
-		        } else if (content.get("status").toString().equals("1")) {
 		        	spEdit.putBoolean("loggedIn", true);
 		        	spEdit.putString("id", (String) content.get("id"));
 		        	spEdit.putString("username", username);
@@ -134,22 +133,12 @@ public class LoginActivity extends BaseActivity {
 		        	incorrectLogins = 0;
 		        	Log.e("L1:", "Login ok");
 		        	return true;
-		        } else if (content.get("status").toString().equals("0")) {
+		        } else if (content.get("status").toString().equals("9")) {
 		        	Log.e("L2:", "Login NOT ok");
-		        	if (incorrectLogins < 2) {
-		        		incorrectLogins++;
-		        		Log.e("L3:", "incorrectLogins: " + incorrectLogins);
-					} else {
-						Log.e("L4:", "Block user");
-						// block user
-						httppost = new HttpPost(Registry.BASE_API_URL + "/block");
-						nameValuePairs = new ArrayList<NameValuePair>(2);
-				        nameValuePairs.add(new BasicNameValuePair("username", username));
-				        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-				        httpclient.execute(httppost);
-				        Log.e("L5:", "User has been blocked!");
-				        incorrectLogins = 0;
-					}
+		        	editPassword.setError(getString(R.string.blocked_from_app));
+		        	focusView = editPassword;
+		        	focusView.requestFocus();
+		        	return false;
 		        }
 		        
 		        return false;
