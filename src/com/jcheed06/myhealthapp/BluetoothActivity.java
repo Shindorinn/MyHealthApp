@@ -37,6 +37,11 @@ import android.widget.Toast;
 
 public class BluetoothActivity extends Activity {
 
+	private PulseMeasurement pulseMeasurement;
+	private PressureMeasurement pressureMeasurement;
+	private ECGMeasurement ecgMeasurement;
+	
+	
 	private final static int REQUEST_ENABLE_BT = 1;
 	BluetoothAdapter btAdapter;
 	BluetoothDevice device;
@@ -147,15 +152,13 @@ public class BluetoothActivity extends Activity {
 	}
 
 	private class SendMeasurement extends AsyncTask<Void, Void, Boolean> {
+		
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			HttpClient httpclient = new DefaultHttpClient();
-
 			HttpPost httppost = new HttpPost(Registry.BASE_API_URL
 					+ Registry.SEND_MEASUREMENT_COMMAND);
-
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
 			return null;
 		}
 
@@ -200,7 +203,6 @@ public class BluetoothActivity extends Activity {
 			try {
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -211,14 +213,13 @@ public class BluetoothActivity extends Activity {
 		private final BluetoothSocket socket;
 		private final InputStream is;
 		private final OutputStream os;
-		private ArrayList<Integer> FirstMeasurementValues = new ArrayList<Integer>();
 		private int FirstValueToSend;
+		private ArrayList<Integer> FirstMeasurementValues;
 
 		public ConnectedThread(BluetoothSocket socket) {
 			this.socket = socket;
 			InputStream tmpis = null;
 			OutputStream tmpos = null;
-
 			try {
 				tmpis = socket.getInputStream();
 				tmpos = socket.getOutputStream();
@@ -226,40 +227,22 @@ public class BluetoothActivity extends Activity {
 				Log.e("health", "Couldn't create input or outputstream.");
 				e.printStackTrace();
 			}
-
 			is = tmpis;
 			os = tmpos;
-
 		}
 
 		public void run() {
-
 			Log.e("health", "ik zit in run van ConnectedThread.");
-
-			String whichMeasurement = "pulsewaves";
-
-			byte[] sendWhichMeasurement = whichMeasurement.getBytes();
-			write(sendWhichMeasurement);
-
 			while (true) {
-
 				int available = 0;
-
 				try {
 					available = is.available();
-
 					if (available > 0) {
-
 						byte[] buffer;
-
 						buffer = new byte[available];
-
 						is.read(buffer);
-
 						String message = new String(buffer);
-
 						String[] partsOfMessage = message.split(";");
-
 						if (partsOfMessage[0].equals("pulse")) {
 							startPulseMeasurement(partsOfMessage[1]);
 						} else if (partsOfMessage[0].equals("ecg")) {
@@ -267,27 +250,25 @@ public class BluetoothActivity extends Activity {
 						} else if (partsOfMessage[0].equals("bloodpressure")) {
 							startBloodPressureMeasurement(partsOfMessage[1]);
 						}
-						
 						Log.e("received", "Message received! " + message);
 					}
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
-
 			}
-
 		}
 
 		private void startPulseMeasurement(String Message) {
 			if(!Message.equals("stop")) {
 				FirstMeasurementValues.add(Integer.parseInt(Message));
 			} else {
+				pulseMeasurement = new PulseMeasurement();
 				int tempInt = 0;
 				for(int i = 0; i < FirstMeasurementValues.size(); i++) {
 					 tempInt += FirstMeasurementValues.get(i);
 				}
-				FirstValueToSend = (tempInt / FirstMeasurementValues.size());
+				pulseMeasurement.setBPM(tempInt / FirstMeasurementValues.size());
 				Log.e("First Value to Send: ", "" + FirstValueToSend);
 			}
 		}
@@ -295,12 +276,18 @@ public class BluetoothActivity extends Activity {
 		private void startECGMeasurement(String Message) {
 			if(!Message.equals("stop")) {
 				
+			}else{
+				ecgMeasurement = new ECGMeasurement();
+				// TODO ECG measurement
 			}
 		}
 
 		private void startBloodPressureMeasurement(String Message) {
 			if(!Message.equals("stop")) {
 				
+			}else{
+				pressureMeasurement = new PressureMeasurement();
+				// TODO pressure measurement
 			}
 		}
 
