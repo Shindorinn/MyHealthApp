@@ -45,7 +45,7 @@ public class SendUrineResult extends AsyncTask<UrineTestData, Integer, Boolean> 
 		HttpPost httppost = new HttpPost(Registry.BASE_API_URL
 				+ Registry.SEND_URINE_TEST);
 		try {
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 			
 			nameValuePairs
 			.add(new BasicNameValuePair("picture", result.getPhoto()));

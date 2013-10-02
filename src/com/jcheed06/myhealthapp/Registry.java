@@ -8,7 +8,6 @@ public final class Registry extends Activity{
 	public static final String BASE_API_URL = "http://145.37.53.40/MyHealthWeb/app";
 	public static final String CHARSET = "UTF-8";
 	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
-	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";	
 	public static final String SHARED_DATA_NAME = "com.jcheed06.myhealthapp.Registry.SHARED_DATA_NAME";
 			
@@ -18,19 +17,10 @@ public final class Registry extends Activity{
 	public static final String LOGIN_COMMAND = "/login";	
 	public static final String SEND_URINE_TEST = "/photo/send";
 	public static final String RETRIEVE_MEASUREMENTS_COMMAND = "/measurements/retrieve";
+	public static final String SEND_MEASUREMENT_COMMAND = "/measurement/send";
 	
 	public static final String REST_CALL_SUCCESS = "success";
-<<<<<<< HEAD
-		
-	public static final String SHARED_DATA_NAME = "com.jcheed06.myhealthapp.Registry.SHARED_DATA_NAME";
-	
-	public static final String SEND_MEASUREMENT_COMMAND = "/measurement";
-	
-	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
-=======
-
->>>>>>> origin/retrievemeasurements
-	
+			
 	public static final int TASK_LOGIN_REQUEST 		   	= 0;
 	public static final int TASK_LOGIN_REQUEST_SUCCESS 	= 1;
 	public static final int TASK_LOGIN_REQUEST_FAILED  	= 2;
@@ -39,6 +29,7 @@ public final class Registry extends Activity{
 	public static final int TAKE_PICTURE_NOT_AVAILABLE 	= 5;
 	
 	public static final int VIEW_MEASUREMENTS_REQUEST = 7;
+	
 	
 	private Registry(){}
 	
