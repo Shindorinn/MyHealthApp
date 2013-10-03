@@ -269,6 +269,7 @@ public class BluetoothActivity extends Activity {
 			if(!Message.equals("stop")) {
 				FirstMeasurementValues.add(Integer.parseInt(Message));
 			} else {
+				Log.d("myhealth", "asdsdfasdf");
 				pulseMeasurement = new PulseMeasurement();
 				int tempInt = 0;
 				for(int i = 0; i < FirstMeasurementValues.size(); i++) {
