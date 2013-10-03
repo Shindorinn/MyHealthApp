@@ -219,7 +219,7 @@ public class BluetoothActivity extends Activity {
 		private final InputStream is;
 		private final OutputStream os;
 		private int FirstValueToSend;
-		private ArrayList<Integer> FirstMeasurementValues;
+		private ArrayList<Integer> FirstMeasurementValues = new ArrayList<Integer>();
 
 		public ConnectedThread(BluetoothSocket socket) {
 			this.socket = socket;
@@ -247,6 +247,7 @@ public class BluetoothActivity extends Activity {
 						buffer = new byte[available];
 						is.read(buffer);
 						String message = new String(buffer);
+						Log.e("health", "Message is: " + message);
 						String[] partsOfMessage = message.split(";");
 						if (partsOfMessage[0].equals("pulse")) {
 							startPulseMeasurement(partsOfMessage[1]);
