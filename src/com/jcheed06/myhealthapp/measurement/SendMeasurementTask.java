@@ -91,14 +91,15 @@ public class SendMeasurementTask extends BaseActivity {
 							+ ecgm.getPpeak()));
 
 				}
+				nameValuePairs.add(new BasicNameValuePair("type", ""
+						+ type));
+				
 				Log.d("myhealth", "Entity");
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-				Log.d("myhealth", "1245");
+				Log.d("myhealth", "" + httppost.getAllHeaders());
 				HttpResponse response = httpclient.execute(httppost);
 				Log.d("myhealth", "hallo!!!");
-				BufferedReader buffer = new BufferedReader(
-						new InputStreamReader(
-								response.getEntity().getContent(), "UTF-8"));
+				BufferedReader buffer = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
 				StringBuilder sb = new StringBuilder();
 				String r = "";
 
