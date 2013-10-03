@@ -12,6 +12,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.jcheed06.myhealthapp.measurement.ECGMeasurement;
+import com.jcheed06.myhealthapp.measurement.PressureMeasurement;
+import com.jcheed06.myhealthapp.measurement.PulseMeasurement;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;

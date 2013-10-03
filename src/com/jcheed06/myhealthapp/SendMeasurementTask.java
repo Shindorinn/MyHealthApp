@@ -18,6 +18,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.jcheed06.myhealthapp.measurement.ECGMeasurement;
+import com.jcheed06.myhealthapp.measurement.PressureMeasurement;
+import com.jcheed06.myhealthapp.measurement.PulseMeasurement;
+
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.text.format.DateUtils;
