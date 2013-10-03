@@ -13,6 +13,9 @@ public class ECGMeasurement extends Measurement {
 	private Integer tpeak;
 	private Integer ppeak;
 	
+	public ECGMeasurement(){
+		super(null);
+	}
 
 	public ECGMeasurement(String id, Integer printerval, Integer prsegment, Integer qrscomplex, Integer stsegment ,
 								Integer qtinterval, Integer qtrough, Integer rpeak, Integer strough, Integer tpeak,

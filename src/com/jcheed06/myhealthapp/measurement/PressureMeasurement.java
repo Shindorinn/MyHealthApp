@@ -2,16 +2,19 @@ package com.jcheed06.myhealthapp.measurement;
 
 public class PressureMeasurement extends Measurement {
 
+	private Integer hypoTension;
+	private Integer hyperTension;
+	
+	public PressureMeasurement(){
+		super(null);
+	}
+
 	public PressureMeasurement(String id, Integer hypoTension, Integer hyperTension) {
 		super(id);
 		this.setHyperTension(hyperTension);
 		this.setHypoTension(hypoTension);
 	}
 
-	private Integer hypoTension;
-	private Integer hyperTension;
-	
-	
 	public Integer getHypoTension() {
 		return hypoTension;
 	}

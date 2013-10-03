@@ -2,13 +2,17 @@ package com.jcheed06.myhealthapp.measurement;
 
 public class PulseMeasurement extends Measurement {
 
+	private Integer bpm;
+
+	public PulseMeasurement() {
+		super(null);
+	}
+
 	public PulseMeasurement(String id, Integer bpm) {
 		super(id);
 		this.setBPM(bpm);
 	}
 
-	private Integer bpm;
-	
 	@Override
 	public String getMeasurementValues() {
 		StringBuilder builder = new StringBuilder();
