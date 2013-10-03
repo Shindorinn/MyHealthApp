@@ -91,24 +91,23 @@ public class TakePictureActivity extends BaseActivity {
 			Utils.bitmapToMat(bitmap, imgToCompare);
 			Mat result = new Mat();
 			
-//			Imgproc.cvtColor(imgToCompareWith, imgToCompareWith, Imgproc.COLOR_RGB2GRAY);
-//			Imgproc.cvtColor(imgToCompare, imgToCompare, Imgproc.COLOR_RGB2GRAY);
+			Imgproc.cvtColor(imgToCompareWith, imgToCompareWith, Imgproc.COLOR_RGB2GRAY);
+			Imgproc.cvtColor(imgToCompare, imgToCompare, Imgproc.COLOR_RGB2GRAY);
 			
 //			Core.absdiff(imgToCompare, imgToCompareWith, result);
-//			Log.e("health", "" + Core.norm(imgToCompare, imgToCompareWith));
 			
-//			Core.compare(imgToCompare, imgToCompareWith, result, Core.CMP_NE);
+			Core.compare(imgToCompare, imgToCompareWith, result, Core.CMP_NE);
 			
-//			Log.e("health", "" + result.toString());
+			int val = Core.countNonZero(result);
 			
-//			int val = Core.countNonZero(result);
-			
-//			double val = Core.norm(imgToCompare, imgToCompareWith);
-			
-//			if(val == 0) {
-//				Log.e("health", "Photo is exactly the same");
-//			} 
-//			Log.e("health", "Value: " + val);
+			if(val == 0) {
+				Log.e("health", "Photo is exactly the same");
+			} else if (val <= 4050000) {
+				Log.e("health", "Photo is about the same");
+			} else if (val > 4050000) {
+				Log.e("health", "Photo is different");
+			}
+			Log.e("health", "Value: " + val);
 			
 //			new SendUrineResult(this).execute(result);
 //			takePictureImageView.setImageBitmap(bitmap);
