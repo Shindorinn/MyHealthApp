@@ -14,14 +14,15 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jcheed06.myhealthapp.DebugLogger;
-import com.jcheed06.myhealthapp.Registry;
-
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.jcheed06.myhealthapp.DebugLogger;
+import com.jcheed06.myhealthapp.Registry;
 
 public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<Measurement>> {
 
@@ -57,11 +58,26 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		    
 		    JSONObject content = new JSONObject(sb.toString());
 	        buffer.close();
-	        Log.e("H2:", "content: " + content.toString());
+//	        Log.e("H2:", "content: " + content.toString());
 	        
 	        
 	       	if (content.get("status").toString().equals("1")) {
-	        	DebugLogger.log_i("RetrieveMeasurementsTask", "content.get(id) "+ content.get("id"));
+//	        	DebugLogger.log_i("RetrieveMeasurementsTask", "content.get(id) "+ content.get("id"));
+	       		//DebugLogger.log_i("RetrieveMeasurementsTask", "content.getJSONArray(id) \n"+content.getJSONArray("id"));
+	        	
+//	        	JSONObject values = (JSONObject) content.get("id");
+//	        	DebugLogger.log_i("JSONNames", values.names().toString());
+	        	
+	        	JSONArray array = content.getJSONArray("id");
+
+	        	DebugLogger.log_i("JSONArray", array.toString());
+	        	
+	        	for(int i=0; i < array.length(); i++){
+	        		DebugLogger.log_i("JSONArray : "+i, array.get(i).toString());
+	        		
+	        	}
+	        	
+	        	
 	        } else if (content.get("status").toString().equals("0")) {
 	        	DebugLogger.log_i("RetrieveMeasurementsTask", "No measurements retrieved");
 	        }
