@@ -20,7 +20,11 @@ public final class Registry extends Activity{
 	public static final String SEND_MEASUREMENT_COMMAND = "/measurement/process";
 	
 	public static final String REST_CALL_SUCCESS = "success";
-			
+
+	public static final String RETRIEVE_PULSE_MEASUREMENTS = "/measurement/retrieve/pulse";
+	public static final String RETRIEVE_PRESSURE_MEASUREMENTS = "/measurement/retrieve/pressure";
+	public static final String RETRIEVE_ECG_MEASUREMENTS = "/measurement/retrieve/ecg";
+				
 	public static final int TASK_LOGIN_REQUEST 		   	= 0;
 	public static final int TASK_LOGIN_REQUEST_SUCCESS 	= 1;
 	public static final int TASK_LOGIN_REQUEST_FAILED  	= 2;

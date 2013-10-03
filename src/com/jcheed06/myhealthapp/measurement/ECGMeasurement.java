@@ -1,6 +1,6 @@
 package com.jcheed06.myhealthapp.measurement;
 
-public class ECGMeasurement {
+public class ECGMeasurement extends Measurement {
 	
 	private Integer printerval;
 	private Integer prsegment;
@@ -12,6 +12,40 @@ public class ECGMeasurement {
 	private Integer strough	;
 	private Integer tpeak;
 	private Integer ppeak;
+	
+
+	public ECGMeasurement(String id, Integer printerval, Integer prsegment, Integer qrscomplex, Integer stsegment ,
+								Integer qtinterval, Integer qtrough, Integer rpeak, Integer strough, Integer tpeak,
+								Integer ppeak) {
+		super(id);
+		this.setPrinterval(printerval);
+		this.setPrsegment(prsegment);
+		this.setQrscomplex(qrscomplex);
+		this.setStsegment(stsegment);
+		this.setQtinterval(qtinterval);
+		this.setQtrough(qtrough);
+		this.setRpeak(rpeak);
+		this.setStrough(strough);
+		this.setTpeak(tpeak);
+		this.setPpeak(ppeak);
+		
+	}
+	
+	@Override
+	public String getMeasurementValues() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PR Interval : " + printerval);
+		builder.append("PR Segment : " + prsegment);
+		builder.append("QRS Complex : " + qrscomplex);
+		builder.append("ST Segment : " + stsegment);
+		builder.append("QT Interval : " + qtinterval);
+		builder.append("Q Trough : " + qtrough);
+		builder.append("R Peak : " + rpeak);
+		builder.append("S Trough : " + strough);
+		builder.append("T Peak : " + tpeak);
+		builder.append("P Peak : " + ppeak);
+		return builder.toString();
+	}
 	
 	public Integer getPpeak() {
 		return ppeak;
@@ -43,7 +77,6 @@ public class ECGMeasurement {
 	public void setTpeak(Integer tpeak) {
 		this.tpeak = tpeak;
 	}
-
 	public Integer getPrinterval() {
 		return printerval;
 	}

@@ -1,6 +1,12 @@
 package com.jcheed06.myhealthapp.measurement;
 
-public class PressureMeasurement {
+public class PressureMeasurement extends Measurement {
+
+	public PressureMeasurement(String id, Integer hypoTension, Integer hyperTension) {
+		super(id);
+		this.setHyperTension(hyperTension);
+		this.setHypoTension(hypoTension);
+	}
 
 	private Integer hypoTension;
 	private Integer hyperTension;
@@ -10,6 +16,14 @@ public class PressureMeasurement {
 		return hypoTension;
 	}
 	
+	@Override
+	public String getMeasurementValues() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("HyperTension : " + hyperTension);
+		builder.append("HypoTension : " + hypoTension);
+		return builder.toString();
+	}
+		
 	public void setHypoTension(Integer hypoTension) {
 		this.hypoTension = hypoTension;
 	}
