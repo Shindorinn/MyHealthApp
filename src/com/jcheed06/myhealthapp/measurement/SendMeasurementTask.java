@@ -24,9 +24,10 @@ import com.jcheed06.myhealthapp.Registry;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.text.format.DateUtils;
+import android.util.Log;
 
 public class SendMeasurementTask extends BaseActivity {
-	public SharedPreferences sp;
+	public static SharedPreferences sp;
 
 	public SendMeasurementTask(Object measurement) {
 		this.sp = super.sp;
@@ -45,11 +46,11 @@ public class SendMeasurementTask extends BaseActivity {
 				String type = "";
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 						10);
-				nameValuePairs.add(new BasicNameValuePair("username", sp
-						.getString("username", "default")));
+				nameValuePairs.add(new BasicNameValuePair("username",
+						"cristianhalman"));
 				Date date = new Date();
-				nameValuePairs.add(new BasicNameValuePair("timestamp",
-						"" + date.getTime()));
+				Log.d("myhealth", "" + params[0]);
+				nameValuePairs.add(new BasicNameValuePair("timestamp", "00-06-00 00:00:00"));
 				if (params[0] instanceof PressureMeasurement) {
 					PressureMeasurement pm = (PressureMeasurement) params[0];
 					type = "0";
@@ -57,41 +58,44 @@ public class SendMeasurementTask extends BaseActivity {
 							"" + pm.getHyperTension()));
 					nameValuePairs.add(new BasicNameValuePair("hypotension", ""
 							+ pm.getHypoTension()));
-					
+
 				} else if (params[0] instanceof PulseMeasurement) {
 					PulseMeasurement psm = (PulseMeasurement) params[0];
 					type = "1";
-					nameValuePairs.add(new BasicNameValuePair("bpm",
-							"" + psm.getBPM()));
+					nameValuePairs.add(new BasicNameValuePair("bpm", ""
+							+ psm.getBPM()));
+
+					Log.d("myhealth", "In pulse: " + psm.getBPM());
 				} else if (params[0] instanceof ECGMeasurement) {
 					ECGMeasurement ecgm = (ECGMeasurement) params[0];
 					type = "2";
-					nameValuePairs.add(new BasicNameValuePair("printerval",
-							"" + ecgm.getPrinterval()));
-					nameValuePairs.add(new BasicNameValuePair("prsegment",
-							"" + ecgm.getPrsegment()));
-					nameValuePairs.add(new BasicNameValuePair("qrscomplex",
-							"" + ecgm.getQrscomplex()));
-					nameValuePairs.add(new BasicNameValuePair("stsegment",
-							"" + ecgm.getStsegment()));
-					nameValuePairs.add(new BasicNameValuePair("qtinterval",
-							"" + ecgm.getQtinterval()));
-					nameValuePairs.add(new BasicNameValuePair("qtrough",
-							"" + ecgm.getQtrough()));
-					nameValuePairs.add(new BasicNameValuePair("rpeak",
-							"" + ecgm.getRpeak()));
-					nameValuePairs.add(new BasicNameValuePair("strough",
-							"" + ecgm.getStrough()));
-					nameValuePairs.add(new BasicNameValuePair("tpeak",
-							"" + ecgm.getTpeak()));
-					nameValuePairs.add(new BasicNameValuePair("ppeak",
-							"" + ecgm.getPpeak()));
+					nameValuePairs.add(new BasicNameValuePair("printerval", ""
+							+ ecgm.getPrinterval()));
+					nameValuePairs.add(new BasicNameValuePair("prsegment", ""
+							+ ecgm.getPrsegment()));
+					nameValuePairs.add(new BasicNameValuePair("qrscomplex", ""
+							+ ecgm.getQrscomplex()));
+					nameValuePairs.add(new BasicNameValuePair("stsegment", ""
+							+ ecgm.getStsegment()));
+					nameValuePairs.add(new BasicNameValuePair("qtinterval", ""
+							+ ecgm.getQtinterval()));
+					nameValuePairs.add(new BasicNameValuePair("qtrough", ""
+							+ ecgm.getQtrough()));
+					nameValuePairs.add(new BasicNameValuePair("rpeak", ""
+							+ ecgm.getRpeak()));
+					nameValuePairs.add(new BasicNameValuePair("strough", ""
+							+ ecgm.getStrough()));
+					nameValuePairs.add(new BasicNameValuePair("tpeak", ""
+							+ ecgm.getTpeak()));
+					nameValuePairs.add(new BasicNameValuePair("ppeak", ""
+							+ ecgm.getPpeak()));
+
 				}
-
+				Log.d("myhealth", "Entity");
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
+				Log.d("myhealth", "1245");
 				HttpResponse response = httpclient.execute(httppost);
-
+				Log.d("myhealth", "hallo!!!");
 				BufferedReader buffer = new BufferedReader(
 						new InputStreamReader(
 								response.getEntity().getContent(), "UTF-8"));
@@ -103,6 +107,7 @@ public class SendMeasurementTask extends BaseActivity {
 				}
 
 				JSONObject content = new JSONObject(sb.toString());
+				Log.d("myhealth", "content: " + sb.toString());
 				if (content.get("status").equals("1")) {
 					return true;
 				}

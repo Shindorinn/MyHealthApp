@@ -5,7 +5,7 @@ import android.content.Context;
 
 public final class Registry extends Activity{
 
-	public static final String BASE_API_URL = "http://145.33.128.12/MyHealthWeb/app";
+	public static final String BASE_API_URL = "http://145.37.84.135/MyHealthWeb/app";
 	public static final String CHARSET = "UTF-8";
 	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";	
@@ -17,7 +17,7 @@ public final class Registry extends Activity{
 	public static final String LOGIN_COMMAND = "/login";	
 	public static final String SEND_URINE_TEST = "/photo/send";
 	public static final String RETRIEVE_MEASUREMENTS_COMMAND = "/measurement/retrieve";
-	public static final String SEND_MEASUREMENT_COMMAND = "/measurement/send";
+	public static final String SEND_MEASUREMENT_COMMAND = "/measurement/process";
 	
 	public static final String REST_CALL_SUCCESS = "success";
 			

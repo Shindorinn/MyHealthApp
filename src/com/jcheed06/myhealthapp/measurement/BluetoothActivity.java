@@ -218,8 +218,6 @@ public class BluetoothActivity extends Activity {
 		private final BluetoothSocket socket;
 		private final InputStream is;
 		private final OutputStream os;
-		private int FirstValueToSend;
-		private ArrayList<Integer> FirstMeasurementValues = new ArrayList<Integer>();
 
 		public ConnectedThread(BluetoothSocket socket) {
 			this.socket = socket;
@@ -265,40 +263,6 @@ public class BluetoothActivity extends Activity {
 			}
 		}
 
-		private void startPulseMeasurement(String Message) {
-			if(!Message.equals("stop")) {
-				FirstMeasurementValues.add(Integer.parseInt(Message));
-			} else {
-				Log.d("myhealth", "asdsdfasdf");
-				pulseMeasurement = new PulseMeasurement();
-				int tempInt = 0;
-				for(int i = 0; i < FirstMeasurementValues.size(); i++) {
-					 tempInt += FirstMeasurementValues.get(i);
-				}
-				pulseMeasurement.setBPM(tempInt / FirstMeasurementValues.size());
-				new SendMeasurementTask(pulseMeasurement);
-				Log.e("First Value to Send: ", "" + FirstValueToSend);
-			}
-		}
-
-		private void startECGMeasurement(String Message) {
-			if(!Message.equals("stop")) {
-				
-			}else{
-				ecgMeasurement = new ECGMeasurement();
-				// TODO ECG measurement
-			}
-		}
-
-		private void startBloodPressureMeasurement(String Message) {
-			if(!Message.equals("stop")) {
-				
-			}else{
-				pressureMeasurement = new PressureMeasurement();
-				// TODO pressure measurement
-			}
-		}
-
 		public void write(byte[] bytes) {
 			try {
 				os.write(bytes);
@@ -315,6 +279,38 @@ public class BluetoothActivity extends Activity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void startPulseMeasurement(final String message) {
+		BluetoothActivity.this.runOnUiThread(new Runnable() {
+
+	        public void run() {
+	        	Log.d("myhealth", "asdsdfasdf");
+	    		pulseMeasurement = new PulseMeasurement();
+	    		Integer pulse = Integer.parseInt(message);
+	    		pulseMeasurement.setBPM(pulse);
+	    		new SendMeasurementTask(pulseMeasurement);
+	        }
+	    });
+		
+	}
+
+	private void startECGMeasurement(String Message) {
+		if(!Message.equals("stop")) {
+			
+		}else{
+			ecgMeasurement = new ECGMeasurement();
+			// TODO ECG measurement
+		}
+	}
+
+	private void startBloodPressureMeasurement(String Message) {
+		if(!Message.equals("stop")) {
+			
+		}else{
+			pressureMeasurement = new PressureMeasurement();
+			// TODO pressure measurement
 		}
 	}
 
