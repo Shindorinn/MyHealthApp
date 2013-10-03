@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity {
 		        	return true;
 		        } else if (content.get("status").toString().equals("9")) {
 		        	Log.e("L2:", "Login NOT ok");
-		        //	editPassword.setError(getString(R.string.blocked_from_app));
+		        	editPassword.setError(getString(R.string.blocked_from_app));
 		        	focusView = editPassword;
 		        	focusView.requestFocus();
 		        	return false;
