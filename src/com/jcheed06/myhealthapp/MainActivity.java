@@ -1,7 +1,7 @@
 package com.jcheed06.myhealthapp;
 
 
-import com.jcheed06.myhealthapp.bluetooth.BluetoothActivity;
+import com.jcheed06.myhealthapp.measurement.BluetoothActivity;
 import com.jcheed06.myhealthapp.measurement.ViewMeasurementsActivity;
 import com.jcheed06.myhealthapp.urinetest.TakePictureActivity;
 

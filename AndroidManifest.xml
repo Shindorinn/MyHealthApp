@@ -43,7 +43,7 @@
             android:label="@string/title_activity_about" >
         </activity>
         <activity
-            android:name="com.jcheed06.myhealthapp.bluetooth.BluetoothActivity"
+            android:name="com.jcheed06.myhealthapp.measurement.BluetoothActivity"
             android:label="@string/title_activity_bluetooth" >
         </activity>
         <activity
