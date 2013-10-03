@@ -269,6 +269,7 @@ public class BluetoothActivity extends Activity {
 					 tempInt += FirstMeasurementValues.get(i);
 				}
 				pulseMeasurement.setBPM(tempInt / FirstMeasurementValues.size());
+				new SendMeasurementTask(pulseMeasurement);
 				Log.e("First Value to Send: ", "" + FirstValueToSend);
 			}
 		}
