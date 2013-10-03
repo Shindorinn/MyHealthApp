@@ -250,9 +250,9 @@ public class BluetoothActivity extends Activity {
 						if (partsOfMessage[0].equals("pulse")) {
 							startPulseMeasurement(partsOfMessage[1]);
 						} else if (partsOfMessage[0].equals("ecg")) {
-							startECGMeasurement(partsOfMessage[1]);
+							startECGMeasurement(partsOfMessage);
 						} else if (partsOfMessage[0].equals("bloodpressure")) {
-							startBloodPressureMeasurement(partsOfMessage[1]);
+							startBloodPressureMeasurement(partsOfMessage);
 						}
 						Log.e("received", "Message received! " + message);
 					}
@@ -286,7 +286,6 @@ public class BluetoothActivity extends Activity {
 		BluetoothActivity.this.runOnUiThread(new Runnable() {
 
 	        public void run() {
-	        	Log.d("myhealth", "asdsdfasdf");
 	    		pulseMeasurement = new PulseMeasurement();
 	    		Integer pulse = Integer.parseInt(message);
 	    		pulseMeasurement.setBPM(pulse);
@@ -296,22 +295,36 @@ public class BluetoothActivity extends Activity {
 		
 	}
 
-	private void startECGMeasurement(String Message) {
-		if(!Message.equals("stop")) {
-			
-		}else{
-			ecgMeasurement = new ECGMeasurement();
-			// TODO ECG measurement
-		}
+	private void startECGMeasurement(final String[] message) {
+		BluetoothActivity.this.runOnUiThread(new Runnable() {
+
+	        public void run() {
+	        	ecgMeasurement = new ECGMeasurement();
+	        	ecgMeasurement.setPrinterval(Integer.parseInt(message[1]));
+	        	ecgMeasurement.setPrsegment(Integer.parseInt(message[2]));
+	    		ecgMeasurement.setQrscomplex(Integer.parseInt(message[3]));
+	    		ecgMeasurement.setStsegment(Integer.parseInt(message[4]));
+	    		ecgMeasurement.setQtinterval(Integer.parseInt(message[5]));
+	    		ecgMeasurement.setQtrough(Integer.parseInt(message[6]));
+	    		ecgMeasurement.setRpeak(Integer.parseInt(message[7]));
+	    		ecgMeasurement.setStrough(Integer.parseInt(message[8]));
+	    		ecgMeasurement.setTpeak(Integer.parseInt(message[9]));
+	    		ecgMeasurement.setPpeak(Integer.parseInt(message[10]));
+	    		new SendMeasurementTask(ecgMeasurement);
+	        }
+	    });
 	}
 
-	private void startBloodPressureMeasurement(String Message) {
-		if(!Message.equals("stop")) {
-			
-		}else{
-			pressureMeasurement = new PressureMeasurement();
-			// TODO pressure measurement
-		}
+	private void startBloodPressureMeasurement(final String[] message) {
+		BluetoothActivity.this.runOnUiThread(new Runnable() {
+
+	        public void run() {
+	    		pressureMeasurement = new PressureMeasurement();
+	    		pressureMeasurement.setHypoTension(Integer.parseInt(message[1]));
+	    		pressureMeasurement.setHyperTension(Integer.parseInt(message[2]));
+	    		new SendMeasurementTask(pressureMeasurement);
+	        }
+	    });
 	}
 
 }

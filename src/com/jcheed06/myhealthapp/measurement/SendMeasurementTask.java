@@ -38,6 +38,15 @@ public class SendMeasurementTask extends BaseActivity {
 
 		@Override
 		protected Boolean doInBackground(Object... params) {
+			int num = 0;
+			if (params[0] instanceof PulseMeasurement) {
+				num = 4;
+			} else if (params[0] instanceof PressureMeasurement) {
+				num = 5;
+			} else if (params[0] instanceof ECGMeasurement) {
+				num = 13;
+			}
+
 			HttpClient httpclient = new DefaultHttpClient();
 
 			HttpPost httppost = new HttpPost(Registry.BASE_API_URL
@@ -45,12 +54,13 @@ public class SendMeasurementTask extends BaseActivity {
 			try {
 				String type = "";
 				List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
-						10);
+						num);
 				nameValuePairs.add(new BasicNameValuePair("username",
 						"cristianhalman"));
 				Date date = new Date();
 				Log.d("myhealth", "" + params[0]);
-				nameValuePairs.add(new BasicNameValuePair("timestamp", "00-06-00 00:00:00"));
+				nameValuePairs.add(new BasicNameValuePair("timestamp",
+						"00-06-00 00:00:00"));
 				if (params[0] instanceof PressureMeasurement) {
 					PressureMeasurement pm = (PressureMeasurement) params[0];
 					type = "0";
@@ -66,6 +76,7 @@ public class SendMeasurementTask extends BaseActivity {
 							+ psm.getBPM()));
 
 					Log.d("myhealth", "In pulse: " + psm.getBPM());
+
 				} else if (params[0] instanceof ECGMeasurement) {
 					ECGMeasurement ecgm = (ECGMeasurement) params[0];
 					type = "2";
@@ -89,17 +100,14 @@ public class SendMeasurementTask extends BaseActivity {
 							+ ecgm.getTpeak()));
 					nameValuePairs.add(new BasicNameValuePair("ppeak", ""
 							+ ecgm.getPpeak()));
-
 				}
-				nameValuePairs.add(new BasicNameValuePair("type", ""
-						+ type));
-				
-				Log.d("myhealth", "Entity");
+				nameValuePairs.add(new BasicNameValuePair("type", "" + type));
+
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-				Log.d("myhealth", "" + httppost.getAllHeaders());
 				HttpResponse response = httpclient.execute(httppost);
-				Log.d("myhealth", "hallo!!!");
-				BufferedReader buffer = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+				BufferedReader buffer = new BufferedReader(
+						new InputStreamReader(
+								response.getEntity().getContent(), "UTF-8"));
 				StringBuilder sb = new StringBuilder();
 				String r = "";
 
@@ -108,20 +116,17 @@ public class SendMeasurementTask extends BaseActivity {
 				}
 
 				JSONObject content = new JSONObject(sb.toString());
-				Log.d("myhealth", "content: " + sb.toString());
+
 				if (content.get("status").equals("1")) {
 					return true;
 				}
 
 				buffer.close();
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
