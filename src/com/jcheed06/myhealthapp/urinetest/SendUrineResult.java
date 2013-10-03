@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.urinetest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +15,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.jcheed06.myhealthapp.Registry;
+
 
 import android.content.Context;
 import android.os.AsyncTask;

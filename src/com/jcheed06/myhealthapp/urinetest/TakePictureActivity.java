@@ -1,8 +1,16 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.urinetest;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+
+import com.jcheed06.myhealthapp.BaseActivity;
+import com.jcheed06.myhealthapp.DebugLogger;
+import com.jcheed06.myhealthapp.R;
+import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.R.id;
+import com.jcheed06.myhealthapp.R.layout;
+
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.urinetest;
 
 import java.io.ByteArrayOutputStream;
 

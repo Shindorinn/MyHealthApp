@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp;
+package com.jcheed06.myhealthapp.bluetooth;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +12,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.jcheed06.myhealthapp.R;
+import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.R.id;
+import com.jcheed06.myhealthapp.R.layout;
 import com.jcheed06.myhealthapp.measurement.ECGMeasurement;
 import com.jcheed06.myhealthapp.measurement.PressureMeasurement;
 import com.jcheed06.myhealthapp.measurement.PulseMeasurement;
+import com.jcheed06.myhealthapp.measurement.SendMeasurementTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
