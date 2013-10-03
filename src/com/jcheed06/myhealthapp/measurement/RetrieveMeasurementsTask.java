@@ -31,6 +31,8 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		ArrayList<Measurement> toReturn = new ArrayList<Measurement>();
 		String id = contactInfo[0];
 		
+		DebugLogger.log_i("RetrieveMeasurementsTask", "id : " + id);
+		
 		// Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
 	    
@@ -39,7 +41,7 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 	    try {
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-	        nameValuePairs.add(new BasicNameValuePair("id", id));
+	        nameValuePairs.add(new BasicNameValuePair("user_id", id));
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 	        
 	        HttpResponse response = httpclient.execute(httppost);
@@ -50,14 +52,19 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		    while ((string = buffer.readLine()) != null) {
 		    	sb.append(string);
 		    }
-
+		    
+		    DebugLogger.log_d("RetrieveMeasurementsTask", "Message : " + sb.toString());
+		    
 		    JSONObject content = new JSONObject(sb.toString());
 	        buffer.close();
 	        Log.e("H2:", "content: " + content.toString());
 	        
-//	        if (content.get("status").toString().equals("1")) {
-//	        	
-//	        } else if (content.get("status").toString().equals("1")) {
+	        
+	       	if (content.get("status").toString().equals("1")) {
+	        	DebugLogger.log_i("RetrieveMeasurementsTask", "content.get(id) "+ content.get("id"));
+	        } else if (content.get("status").toString().equals("0")) {
+	        	DebugLogger.log_i("RetrieveMeasurementsTask", "No measurements retrieved");
+	        }
 //	        	spEdit.putBoolean("loggedIn", true);
 //	        	spEdit.putString("id", (String) content.get("id"));
 //	        	spEdit.putString("username", username);
@@ -92,6 +99,9 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		} catch (IOException ex) {
 	    	DebugLogger.log_e("RetrieveMeasurementsTask", ex.getMessage());
 		}
+	    
+	    DebugLogger.log_i("RetrieveMeasurementsTask", "returning, JSON :" + toReturn.toString());
+	    
 		return toReturn;
 	}
 
