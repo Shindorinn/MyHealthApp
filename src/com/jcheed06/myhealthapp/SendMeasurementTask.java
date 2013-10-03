@@ -45,7 +45,7 @@ public class SendMeasurementTask extends BaseActivity {
 
 				if (params[0] instanceof PressureMeasurement) {
 					PressureMeasurement pm = (PressureMeasurement) params[0];
-
+					type = "0";
 					nameValuePairs.add(new BasicNameValuePair("hypertension",
 							"" + pm.getHyperTension()));
 					nameValuePairs.add(new BasicNameValuePair("hypotension", ""

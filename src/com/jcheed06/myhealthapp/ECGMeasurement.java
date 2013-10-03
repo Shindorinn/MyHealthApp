@@ -1,6 +1,7 @@
 package com.jcheed06.myhealthapp;
 
 public class ECGMeasurement {
+	
 	private Integer printerval;
 	private Integer prsegment;
 	private Integer qrscomplex;
