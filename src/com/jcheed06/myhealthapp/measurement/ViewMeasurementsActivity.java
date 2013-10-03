@@ -40,7 +40,7 @@ public class ViewMeasurementsActivity extends Activity {
 	private ArrayList<Measurement> getMeasurements() throws InterruptedException, ExecutionException {
 		SharedPreferences spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
 		RetrieveMeasurementsTask retriever = new RetrieveMeasurementsTask();
-		retriever.execute(spData.getString("id", null)); //TODO : Standard value needs to be replaced
+		retriever.execute(spData.getString("id", "3")); //TODO : Standard value needs to be replaced
 		return retriever.get();
 	}
 
