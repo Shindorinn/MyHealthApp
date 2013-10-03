@@ -9,7 +9,7 @@ public class ECGMeasurement extends Measurement {
 	private Integer qtinterval;
 	private Integer qtrough;
 	private Integer rpeak;
-	private Integer strough	;
+	private Integer strough;
 	private Integer tpeak;
 	private Integer ppeak;
 	
