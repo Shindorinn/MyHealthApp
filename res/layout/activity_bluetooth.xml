@@ -21,5 +21,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_discover_bt" />
+    
+    <LinearLayout
+        android:id="@+id/layoutConnected"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:visibility="gone"
+	    android:orientation="vertical" >
+	    
+	    <ProgressBar
+	        android:id="@+id/progressBarMain"
+	        style="?android:attr/progressBarStyleLarge"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content" />
+	
+	    <TextView
+	        android:id="@+id/textMessage"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Listening for incoming measurement..." />
+	    
+	     <Button
+	        android:id="@+id/button_stop_listening"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:text="Stop Listening" />
+	    
+	</LinearLayout>	    
 
 </RelativeLayout>

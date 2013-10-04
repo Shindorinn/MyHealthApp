@@ -40,6 +40,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -56,7 +57,12 @@ public class BluetoothActivity extends Activity {
 	ArrayList<BluetoothDevice> devices;
 	BroadcastReceiver receiver;
 	Handler handler = new Handler();
-
+	
+	LinearLayout connectedLayout;
+	ListView devicesList;
+	Button discoverBtDevices;
+	Button buttonStopDevices;
+	
 	ArrayAdapter aa;
 
 	@Override
@@ -65,10 +71,11 @@ public class BluetoothActivity extends Activity {
 		setContentView(R.layout.activity_bluetooth);
 
 		devices = new ArrayList<BluetoothDevice>();
+		connectedLayout = (LinearLayout) findViewById(R.id.layoutConnected);
 
 		aa = new ArrayAdapter(this, android.R.layout.simple_list_item_1);
 
-		ListView devicesList = (ListView) findViewById(R.id.list_devices);
+		devicesList = (ListView) findViewById(R.id.list_devices);
 		devicesList.setClickable(true);
 		devicesList.setAdapter(aa);
 
@@ -125,6 +132,17 @@ public class BluetoothActivity extends Activity {
 		registerReceiver(receiver, filter);
 
 		discoverConnections();
+		
+		buttonStopDevices = (Button) findViewById(R.id.button_stop_listening);
+		buttonStopDevices.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = getIntent();
+			    finish();
+			    startActivity(intent);
+			}
+		});
 
 	}
 
@@ -140,7 +158,7 @@ public class BluetoothActivity extends Activity {
 	}
 
 	private void discoverConnections() {
-		Button discoverBtDevices = (Button) findViewById(R.id.button_discover_bt);
+		discoverBtDevices = (Button) findViewById(R.id.button_discover_bt);
 		discoverBtDevices.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -195,6 +213,7 @@ public class BluetoothActivity extends Activity {
 
 			try {
 				socket.connect();
+				connectedView();
 				new ConnectedThread(socket).start();
 			} catch (IOException e) {
 				try {
@@ -251,10 +270,13 @@ public class BluetoothActivity extends Activity {
 						Log.e("health", "Message is: " + message);
 						String[] partsOfMessage = message.split(";");
 						if (partsOfMessage[0].equals("pulse")) {
+							makeToastAtMeasurementReceived("Pulse measurement received: " + message);
 							startPulseMeasurement(partsOfMessage[1]);
 						} else if (partsOfMessage[0].equals("ecg")) {
+							makeToastAtMeasurementReceived("ECG measurement received");
 							startECGMeasurement(partsOfMessage);
 						} else if (partsOfMessage[0].equals("bloodpressure")) {
+							makeToastAtMeasurementReceived("Bloodpressure measurement received");
 							startBloodPressureMeasurement(partsOfMessage);
 						}
 						Log.e("received", "Message received! " + message);
@@ -289,6 +311,7 @@ public class BluetoothActivity extends Activity {
 		BluetoothActivity.this.runOnUiThread(new Runnable() {
 
 	        public void run() {
+	        	
 	    		pulseMeasurement = new PulseMeasurement();
 	    		Integer pulse = Integer.parseInt(message);
 	    		pulseMeasurement.setBPM(pulse);
@@ -329,5 +352,24 @@ public class BluetoothActivity extends Activity {
 	        }
 	    });
 	}
+	
+	private void makeToastAtMeasurementReceived(final String message) {
+		BluetoothActivity.this.runOnUiThread(new Runnable() {
 
+	        public void run() {
+	        	Toast.makeText(BluetoothActivity.this, message, Toast.LENGTH_SHORT).show();
+	        }
+	    });
+	}
+
+	private void connectedView() {
+		BluetoothActivity.this.runOnUiThread(new Runnable() {
+
+	        public void run() {
+	        	devicesList.setVisibility(View.INVISIBLE);
+	        	discoverBtDevices.setVisibility(View.INVISIBLE);
+	        	connectedLayout.setVisibility(View.VISIBLE);
+	        }
+	    });
+	}
 }
