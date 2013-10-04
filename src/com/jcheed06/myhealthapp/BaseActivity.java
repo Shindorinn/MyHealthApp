@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -18,12 +19,12 @@ public class BaseActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		sp = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 		spEdit = sp.edit();
-		
 		dsp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		super.onCreate(savedInstanceState);
 	}
 	
 	@Override

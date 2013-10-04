@@ -81,13 +81,13 @@ public class TakePictureActivity extends BaseActivity {
 	}
 
 	private void handleSmallCameraPhoto(Intent intent) {
-//		try {
-//			InputStream stream = getContentResolver().openInputStream(
-//					intent.getData());
-//			Bitmap bitmap = BitmapFactory.decodeStream(stream);
-//
-//			Bitmap alreadyHere = BitmapFactory.decodeResource(getBaseContext()
-//					.getResources(), R.drawable.strip);
+		try {
+			InputStream stream = getContentResolver().openInputStream(
+					intent.getData());
+			Bitmap bitmap = BitmapFactory.decodeStream(stream);
+
+			Bitmap alreadyHere = BitmapFactory.decodeResource(getBaseContext()
+					.getResources(), R.drawable.strip);
 //
 //			// Mat imgToCompareWith =
 //			// Highgui.imread(Uri.parse("R.drawable.strip").getPath(),
@@ -117,22 +117,22 @@ public class TakePictureActivity extends BaseActivity {
 //			} else if (val <= 4050000) {
 //				Log.e("health", "Photo is about the same");
 //			} else if (val > 4050000) {
-//				UrineTestData result1 = new UrineTestData(bitmap, "message",
-//						super.sp);
-//				new SendUrineResult(this).execute(result1);
-//				takePictureImageView.setImageBitmap(bitmap);
+				UrineTestData result1 = new UrineTestData(bitmap, "message",
+						super.sp);
+				new SendUrineResult(this).execute(result1);
+				takePictureImageView.setImageBitmap(bitmap);
 //				new SendUrineResult(this).execute(result1);
 //				Log.e("health", "Photo is different");
 //			}
 //			Log.e("health", "Value: " + val);
 //
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			Log.e("health", "IOException!");
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			Log.e("health", "IOException!");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void dispatchTakePictureIntent(int requestCode) {
