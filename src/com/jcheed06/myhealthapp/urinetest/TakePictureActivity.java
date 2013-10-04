@@ -9,26 +9,21 @@ import com.jcheed06.myhealthapp.BaseActivity;
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.R;
 import com.jcheed06.myhealthapp.Registry;
-import com.jcheed06.myhealthapp.R.id;
-import com.jcheed06.myhealthapp.R.layout;
 
-import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
+//import org.opencv.android.OpenCVLoader;
+//import org.opencv.android.Utils;
+//import org.opencv.core.Core;
+//import org.opencv.core.CvType;
+//import org.opencv.core.Mat;
+//import org.opencv.imgproc.Imgproc;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -50,11 +45,11 @@ public class TakePictureActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_take_picture);
 
-		if (!OpenCVLoader.initDebug()) {
-			// Handle initialization error
-		} else {
-			Log.e("health", "Error loading openCV!");
-		}
+//		if (!OpenCVLoader.initDebug()) {
+//			// Handle initialization error
+//		} else {
+//			Log.e("health", "Error loading openCV!");
+//		}
 
 		takePictureImageView = (ImageView) this
 				.findViewById(R.id.takePictureImageView);
@@ -86,58 +81,58 @@ public class TakePictureActivity extends BaseActivity {
 	}
 
 	private void handleSmallCameraPhoto(Intent intent) {
-		try {
-			InputStream stream = getContentResolver().openInputStream(
-					intent.getData());
-			Bitmap bitmap = BitmapFactory.decodeStream(stream);
-
-			Bitmap alreadyHere = BitmapFactory.decodeResource(getBaseContext()
-					.getResources(), R.drawable.strip);
-
-			// Mat imgToCompareWith =
-			// Highgui.imread(Uri.parse("R.drawable.strip").getPath(),
-			// Highgui.CV_LOAD_IMAGE_GRAYSCALE);
-
-			Mat imgToCompareWith = new Mat(alreadyHere.getWidth(),
-					alreadyHere.getHeight(), CvType.CV_8UC1);
-			Utils.bitmapToMat(alreadyHere, imgToCompareWith);
-
-			Mat imgToCompare = new Mat(bitmap.getWidth(), bitmap.getHeight(),
-					CvType.CV_8UC1);
-			Utils.bitmapToMat(bitmap, imgToCompare);
-			Mat result = new Mat();
-
-			Imgproc.cvtColor(imgToCompareWith, imgToCompareWith,
-					Imgproc.COLOR_RGB2GRAY);
-			Imgproc.cvtColor(imgToCompare, imgToCompare, Imgproc.COLOR_RGB2GRAY);
-
-			// Core.absdiff(imgToCompare, imgToCompareWith, result);
-
-			Core.compare(imgToCompare, imgToCompareWith, result, Core.CMP_NE);
-
-			int val = Core.countNonZero(result);
-
-			if (val == 0) {
-				Log.e("health", "Photo is exactly the same");
-			} else if (val <= 4050000) {
-				Log.e("health", "Photo is about the same");
-			} else if (val > 4050000) {
-				UrineTestData result1 = new UrineTestData(bitmap, "message",
-						super.sp);
-				new SendUrineResult(this).execute(result1);
-				takePictureImageView.setImageBitmap(bitmap);
-				new SendUrineResult(this).execute(result1);
-				Log.e("health", "Photo is different");
-			}
-			Log.e("health", "Value: " + val);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			Log.e("health", "IOException!");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			InputStream stream = getContentResolver().openInputStream(
+//					intent.getData());
+//			Bitmap bitmap = BitmapFactory.decodeStream(stream);
+//
+//			Bitmap alreadyHere = BitmapFactory.decodeResource(getBaseContext()
+//					.getResources(), R.drawable.strip);
+//
+//			// Mat imgToCompareWith =
+//			// Highgui.imread(Uri.parse("R.drawable.strip").getPath(),
+//			// Highgui.CV_LOAD_IMAGE_GRAYSCALE);
+//
+//			Mat imgToCompareWith = new Mat(alreadyHere.getWidth(),
+//					alreadyHere.getHeight(), CvType.CV_8UC1);
+//			Utils.bitmapToMat(alreadyHere, imgToCompareWith);
+//
+//			Mat imgToCompare = new Mat(bitmap.getWidth(), bitmap.getHeight(),
+//					CvType.CV_8UC1);
+//			Utils.bitmapToMat(bitmap, imgToCompare);
+//			Mat result = new Mat();
+//
+//			Imgproc.cvtColor(imgToCompareWith, imgToCompareWith,
+//					Imgproc.COLOR_RGB2GRAY);
+//			Imgproc.cvtColor(imgToCompare, imgToCompare, Imgproc.COLOR_RGB2GRAY);
+//
+//			// Core.absdiff(imgToCompare, imgToCompareWith, result);
+//
+//			Core.compare(imgToCompare, imgToCompareWith, result, Core.CMP_NE);
+//
+//			int val = Core.countNonZero(result);
+//
+//			if (val == 0) {
+//				Log.e("health", "Photo is exactly the same");
+//			} else if (val <= 4050000) {
+//				Log.e("health", "Photo is about the same");
+//			} else if (val > 4050000) {
+//				UrineTestData result1 = new UrineTestData(bitmap, "message",
+//						super.sp);
+//				new SendUrineResult(this).execute(result1);
+//				takePictureImageView.setImageBitmap(bitmap);
+//				new SendUrineResult(this).execute(result1);
+//				Log.e("health", "Photo is different");
+//			}
+//			Log.e("health", "Value: " + val);
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			Log.e("health", "IOException!");
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	private void dispatchTakePictureIntent(int requestCode) {
