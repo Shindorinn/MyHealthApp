@@ -42,9 +42,10 @@ public class ViewPulseMeasurementsActivity extends Activity {
 		this.setContentView(R.layout.activity_view_pulse_measurements);
 			
 		this.spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
+		this.pulseMeasurementsList = (ListView) this.findViewById(R.id.listView_pulseMeasurements);
 		
 		this.pulseListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
-		//this.pulseListAdapter.setDropDownViewResource(pulseMeasurementsList.getId());
+		this.pulseMeasurementsList.setAdapter(this.pulseListAdapter);
 		try{
 					
 			for(Measurement measurement : getPulseMeasurements()){
