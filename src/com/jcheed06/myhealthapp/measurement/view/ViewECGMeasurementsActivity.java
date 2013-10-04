@@ -44,8 +44,10 @@ public class ViewECGMeasurementsActivity extends Activity {
 		this.setContentView(R.layout.activity_view_ecgmeasurements);
 		
 		this.spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
+		this.ecgMeasurementsList = (ListView) this.findViewById(R.id.listView_ecgMeasurements);
 		
 		this.ecgListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
+		this.ecgMeasurementsList.setAdapter(ecgListAdapter);
 		
 		try{
 			for(Measurement measurement : getECGMeasurements()){

@@ -41,9 +41,12 @@ public class ViewPressureMeasurementsActivity extends Activity {
 	
 	private void initializeActivity(){
 		this.setContentView(R.layout.activity_view_pressure_measurements);
+		
 		this.spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
+		this.pressureMeasurementsList = (ListView) this.findViewById(R.id.listView_pressureMeasurements);
 		
 		this.pressureListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
+		this.pressureMeasurementsList.setAdapter(pressureListAdapter);
 		
 		try{
 					
