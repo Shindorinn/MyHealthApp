@@ -21,26 +21,16 @@ public class ViewMeasurementsActivity extends TabActivity {
 	}
 
 	private void initializeActivity() {
-		DebugLogger.log_i("ViewMeasurementsActivity", "in initializeActivity");
 		setContentView(R.layout.activity_view_measurements);
-		DebugLogger.log_i("ViewMeasurementsActivity", "setContentView done");
 		
 		TabHost tabHost = super.getTabHost();
-		
-		DebugLogger.log_i("ViewMeasurementsActivity", "found TabHost");
 		
 		TabHost.TabSpec spec;
 		Intent intent;
 		String indicator;
   
 		intent = new Intent().setClass(ViewMeasurementsActivity.this, ViewPulseMeasurementsActivity.class);
-		
-		DebugLogger.log_i("ViewMeasurementsActivity", "intent : " + intent);
-		
 		indicator = getResources().getString(R.string.indicator_viewPulseMeasurements);
-		
-		DebugLogger.log_i("ViewMeasurementsActivity", "indicator : " + indicator);
-		
 		tabHost.addTab(tabHost.newTabSpec(Registry.TAB_PULSE).setIndicator(indicator).setContent(intent));
 
 		intent = new Intent().setClass(ViewMeasurementsActivity.this, ViewPressureMeasurementsActivity.class);

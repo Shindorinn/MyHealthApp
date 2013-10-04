@@ -1,5 +1,7 @@
 package com.jcheed06.myhealthapp.measurement.domain;
 
+import com.jcheed06.myhealthapp.Registry;
+
 public class PulseMeasurement extends Measurement {
 
 	private Integer bpm;
@@ -8,7 +10,7 @@ public class PulseMeasurement extends Measurement {
 		super(null);
 	}
 
-	public PulseMeasurement(String id, Integer bpm) {
+	public PulseMeasurement(Integer id, Integer bpm) {
 		super(id);
 		this.setBPM(bpm);
 	}
@@ -31,6 +33,11 @@ public class PulseMeasurement extends Measurement {
 	
 	public Integer getBPM(){
 		return this.bpm;
+	}
+	
+	@Override
+	public String getType() {
+		return Registry.MEASUREMENT_TYPE_PULSE;
 	}
 	
 }

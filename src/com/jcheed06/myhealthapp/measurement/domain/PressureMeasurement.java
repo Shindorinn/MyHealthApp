@@ -1,5 +1,7 @@
 package com.jcheed06.myhealthapp.measurement.domain;
 
+import com.jcheed06.myhealthapp.Registry;
+
 public class PressureMeasurement extends Measurement {
 
 	private Integer hypoTension;
@@ -9,7 +11,7 @@ public class PressureMeasurement extends Measurement {
 		super(null);
 	}
 
-	public PressureMeasurement(String id, Integer hypoTension, Integer hyperTension) {
+	public PressureMeasurement(Integer id, Integer hypoTension, Integer hyperTension) {
 		super(id);
 		this.setHyperTension(hyperTension);
 		this.setHypoTension(hypoTension);
@@ -43,5 +45,10 @@ public class PressureMeasurement extends Measurement {
 	
 	public void setHyperTension(Integer hyperTension) {
 		this.hyperTension = hyperTension;
+	}
+	
+	@Override
+	public String getType() {
+		return Registry.MEASUREMENT_TYPE_PRESSURE;
 	}
 }

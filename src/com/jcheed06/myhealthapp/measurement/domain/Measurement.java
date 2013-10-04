@@ -4,9 +4,15 @@ public abstract class Measurement {
 
 	protected Integer id;
 	
-	protected Measurement(String id){
-		this.id = this.id;
+	protected Measurement(Integer id){
+		this.id = id;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public abstract String getType();
 	
 	public abstract String getMeasurementValues();
 	

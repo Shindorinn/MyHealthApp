@@ -16,7 +16,8 @@
     
     <!-- Dialog Messages -->
     <string name="view_local_or_online_measurements">Do you want to view local or online measurements?</string>
-
+	<string name="delete_confirmation">Are you sure you want to delete this measurement?</string>
+    
     <!-- About -->
     <string name="title_activity_about">About</string>
     <string name="created_by">Created by:</string>
@@ -35,6 +36,8 @@
     <string name="button_text_discover_bt">Find new device</string>
     <string name="button_text_option_online">Online</string>
     <string name="button_text_option_local">Local</string>
+    <string name="button_text_yes">Yes</string>
+    <string name="button_text_no">No</string>
 
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
@@ -64,5 +67,8 @@
     <string name = "indicator_viewPulseMeasurements">Pulse</string>
     <string name = "indicator_viewPressureMeasurements">Pressure</string>
     <string name = "indicator_viewECGMeasurements">ECG</string>
+    
+    <!-- Error messages -->
+    <string name="delete_error">Could not be deleted</string>
     
 </resources>

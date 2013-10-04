@@ -1,5 +1,7 @@
 package com.jcheed06.myhealthapp.measurement.domain;
 
+import com.jcheed06.myhealthapp.Registry;
+
 public class ECGMeasurement extends Measurement {
 	
 	private Integer printerval;
@@ -17,7 +19,7 @@ public class ECGMeasurement extends Measurement {
 		super(null);
 	}
 
-	public ECGMeasurement(String id, Integer printerval, Integer prsegment, Integer qrscomplex, Integer stsegment ,
+	public ECGMeasurement(Integer id, Integer printerval, Integer prsegment, Integer qrscomplex, Integer stsegment ,
 								Integer qtinterval, Integer qtrough, Integer rpeak, Integer strough, Integer tpeak,
 								Integer ppeak) {
 		super(id);
@@ -123,5 +125,10 @@ public class ECGMeasurement extends Measurement {
 	}
 	public void setQtinterval(Integer qtinterval) {
 		this.qtinterval = qtinterval;
+	}
+
+	@Override
+	public String getType() {
+		return Registry.MEASUREMENT_TYPE_ECG;
 	}
 }

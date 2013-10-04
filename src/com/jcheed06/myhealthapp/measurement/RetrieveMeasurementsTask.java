@@ -120,8 +120,9 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
 				Log.i("RetrieveMeasurementTask", "inflatePulseMeasurement -> JSON : " + measurement);
 				toReturn.add(new PulseMeasurement(
-							measurement.get("id").toString(), 
+							measurement.getInt("id"), 
 							measurement.getInt("bpm")));
+//				DebugLogger.log_i("health", "" + measurement.getInt("id"));
 			} catch (JSONException e) {
 				DebugLogger.log_e("RetrieveMeasurementsTask", e.getMessage());
 			}
@@ -136,7 +137,7 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
 				Log.i("RetrieveMeasurementTask", "inflatePressureMeasurement -> JSON : " + measurement);
 				toReturn.add(new PressureMeasurement(
-							measurement.get("id").toString(),
+							measurement.getInt("id"),
 							measurement.getInt("hypotension"),
 							measurement.getInt("hypertension")));
 			} catch (JSONException e) {
@@ -153,7 +154,7 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
 				Log.i("RetrieveMeasurementTask", "inflateECGMeasurement -> JSON : " + measurement);
 				toReturn.add(new ECGMeasurement(
-							measurement.get("id").toString(),
+							measurement.getInt("id"),
 							measurement.getInt("printerval"),
 							measurement.getInt("prsegment"),
 							measurement.getInt("qrscomplex"),
