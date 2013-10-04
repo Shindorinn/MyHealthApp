@@ -53,7 +53,7 @@ public class DeleteMeasurementsTask extends AsyncTask<String, Void, Boolean> {
 	        	return true;
 	        }
 	    } catch(Exception ex){
-	    	DebugLogger.log_e("RetrieveMeasurementsTask", ex.getMessage());
+	    	DebugLogger.log_e("DeleteMeasurementsTask", ex.getMessage());
 	    }
 	    
 		return false;
