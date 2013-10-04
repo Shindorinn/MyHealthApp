@@ -23,7 +23,10 @@ import android.util.Log;
 
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.measurement.domain.ECGMeasurement;
 import com.jcheed06.myhealthapp.measurement.domain.Measurement;
+import com.jcheed06.myhealthapp.measurement.domain.PressureMeasurement;
+import com.jcheed06.myhealthapp.measurement.domain.PulseMeasurement;
 
 public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<Measurement>> {
 
@@ -33,11 +36,13 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		ArrayList<Measurement> toReturn = new ArrayList<Measurement>();
 		String urlToUse;
 		
-		if(contactInfo[0].equals(Registry.RETRIEVE_PULSE_MEASUREMENTS)){
+		String measurementType = contactInfo[0];
+		
+		if(measurementType.equals(Registry.RETRIEVE_PULSE_MEASUREMENTS)){
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_PULSE_MEASUREMENTS;
-		}else if(contactInfo[0].equals(Registry.RETRIEVE_PRESSURE_MEASUREMENTS)){
+		}else if(measurementType.equals(Registry.RETRIEVE_PRESSURE_MEASUREMENTS)){
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_PRESSURE_MEASUREMENTS;
-		}else if(contactInfo[0].equals(Registry.RETRIEVE_ECG_MEASUREMENTS)){
+		}else if(measurementType.equals(Registry.RETRIEVE_ECG_MEASUREMENTS)){
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_ECG_MEASUREMENTS;
 		}else{
 			throw new IllegalArgumentException("Wrong retrieval command!");
@@ -70,55 +75,17 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 		    DebugLogger.log_d("RetrieveMeasurementsTask", "Message : " + sb.toString());
 		    
 		    JSONObject content = new JSONObject(sb.toString());
-	        buffer.close();
-//	        Log.e("H2:", "content: " + content.toString());
-	        
+	        buffer.close();	        
 	        
 	       	if (content.get("status").toString().equals("1")) {
-//	        	DebugLogger.log_i("RetrieveMeasurementsTask", "content.get(id) "+ content.get("id"));
-	       		//DebugLogger.log_i("RetrieveMeasurementsTask", "content.getJSONArray(id) \n"+content.getJSONArray("id"));
 	        	
-//	        	JSONObject values = (JSONObject) content.get("id");
-//	        	DebugLogger.log_i("JSONNames", values.names().toString());
-	        	
-	        	JSONArray array = content.getJSONArray("id");
-
-	        	DebugLogger.log_i("JSONArray", array.toString());
-	        	
-	        	for(int i=0; i < array.length(); i++){
-	        		DebugLogger.log_i("JSONArray : "+i, array.get(i).toString());
-	        		
-	        	}
-	        	
+	        	JSONArray responses = content.getJSONArray("id");
+	        	inflateResponse(toReturn, responses, measurementType);
+	
 	        	
 	        } else if (content.get("status").toString().equals("0")) {
 	        	DebugLogger.log_i("RetrieveMeasurementsTask", "No measurements retrieved");
-	        }
-//	        	spEdit.putBoolean("loggedIn", true);
-//	        	spEdit.putString("id", (String) content.get("id"));
-//	        	spEdit.putString("username", username);
-//	        	spEdit.commit();
-//	        	incorrectLogins = 0;
-//	        	Log.e("L1:", "Login ok");
-//	        	return true;
-//	        } else if (content.get("status").toString().equals("0")) {
-//	        	Log.e("L2:", "Login NOT ok");
-//	        	if (incorrectLogins < 2) {
-//	        		incorrectLogins++;
-//	        		Log.e("L3:", "incorrectLogins: " + incorrectLogins);
-//				} else {
-//					Log.e("L4:", "Block user");
-//					// block user
-//					httppost = new HttpPost(Registry.BASE_API_URL + "/block");
-//					nameValuePairs = new ArrayList<NameValuePair>(2);
-//			        nameValuePairs.add(new BasicNameValuePair("username", username));
-//			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//			        httpclient.execute(httppost);
-//			        Log.e("L5:", "User has been blocked!");
-//			        incorrectLogins = 0;
-//				}
-//	        }
-		// TODO Auto-generated method stub
+	        }       	
 	    }catch(JSONException ex){
 	    	DebugLogger.log_e("RetrieveMeasurementsTask", ex.getMessage());
 	    } catch (UnsupportedEncodingException ex) {
@@ -129,8 +96,78 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 	    	DebugLogger.log_e("RetrieveMeasurementsTask", ex.getMessage());
 		}
 	    
-	    DebugLogger.log_i("RetrieveMeasurementsTask", "returning, JSON :" + toReturn.toString());
+	    DebugLogger.log_i("RetrieveMeasurementsTask", "returning, ArrayList<Measurement> :" + toReturn.toString());
 	    
+		return toReturn;
+	}
+
+	private void inflateResponse(ArrayList<Measurement> toReturn, JSONArray responses, String measurementType) {
+		if(measurementType.equals(Registry.RETRIEVE_PULSE_MEASUREMENTS)){
+			inflatePulseMeasurements(toReturn, responses);
+		}else if(measurementType.equals(Registry.RETRIEVE_PRESSURE_MEASUREMENTS)){
+			inflatePressureMeasurements(toReturn, responses);
+		}else if(measurementType.equals(Registry.RETRIEVE_ECG_MEASUREMENTS)){
+			inflateECGMeasurements(toReturn, responses);
+		}else{
+			throw new UnsupportedOperationException("Unknown Measurement Type!");
+		}
+	}
+
+	private ArrayList<Measurement> inflatePulseMeasurements(ArrayList<Measurement> toReturn, JSONArray responses) {
+		for(int index = 0; index < responses.length(); index++){
+			try {
+				JSONObject container = new JSONObject(responses.getString(index));
+				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
+				Log.i("RetrieveMeasurementTask", "inflatePulseMeasurement -> JSON : " + measurement);
+				toReturn.add(new PulseMeasurement(
+							measurement.get("id").toString(), 
+							measurement.getInt("bpm")));
+			} catch (JSONException e) {
+				DebugLogger.log_e("RetrieveMeasurementsTask", e.getMessage());
+			}
+		}
+		return toReturn;
+	}
+
+	private ArrayList<Measurement> inflatePressureMeasurements(ArrayList<Measurement> toReturn, JSONArray responses) {
+		for(int index = 0; index < responses.length(); index++){
+			try {
+				JSONObject container = new JSONObject(responses.getString(index));
+				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
+				Log.i("RetrieveMeasurementTask", "inflatePressureMeasurement -> JSON : " + measurement);
+				toReturn.add(new PressureMeasurement(
+							measurement.get("id").toString(),
+							measurement.getInt("hypotension"),
+							measurement.getInt("hypertension")));
+			} catch (JSONException e) {
+				DebugLogger.log_e("RetrieveMeasurementsTask", e.getMessage());
+			}
+		}
+		return toReturn;
+	}
+
+	private ArrayList<Measurement> inflateECGMeasurements(ArrayList<Measurement> toReturn, JSONArray responses) {
+		for(int index = 0; index < responses.length(); index++){
+			try {
+				JSONObject container = new JSONObject(responses.getString(index));
+				JSONObject measurement = new JSONObject(container.getString(container.names().getString(0)));
+				Log.i("RetrieveMeasurementTask", "inflateECGMeasurement -> JSON : " + measurement);
+				toReturn.add(new ECGMeasurement(
+							measurement.get("id").toString(),
+							measurement.getInt("printerval"),
+							measurement.getInt("prsegment"),
+							measurement.getInt("qrscomplex"),
+							measurement.getInt("stsegment"),
+							measurement.getInt("qtinterval"),
+							measurement.getInt("qtrough"),
+							measurement.getInt("rpeak"),
+							measurement.getInt("strough"),
+							measurement.getInt("tpeak"),
+							measurement.getInt("ppeak")));
+			} catch (JSONException e) {
+				DebugLogger.log_e("RetrieveMeasurementsTask", e.getMessage());
+			}
+		}
 		return toReturn;
 	}
 

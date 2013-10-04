@@ -19,6 +19,7 @@ public class PressureMeasurement extends Measurement {
 	public String getMeasurementValues() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("HyperTension : " + hyperTension);
+		builder.append(", ");
 		builder.append("HypoTension : " + hypoTension);
 		return builder.toString();
 	}

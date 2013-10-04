@@ -38,14 +38,23 @@ public class ECGMeasurement extends Measurement {
 	public String getMeasurementValues() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("PR Interval : " + printerval);
+		builder.append(", ");
 		builder.append("PR Segment : " + prsegment);
+		builder.append(", ");
 		builder.append("QRS Complex : " + qrscomplex);
+		builder.append(", ");
 		builder.append("ST Segment : " + stsegment);
+		builder.append(", ");
 		builder.append("QT Interval : " + qtinterval);
+		builder.append(", ");
 		builder.append("Q Trough : " + qtrough);
+		builder.append(", ");
 		builder.append("R Peak : " + rpeak);
+		builder.append(", ");
 		builder.append("S Trough : " + strough);
+		builder.append(", ");
 		builder.append("T Peak : " + tpeak);
+		builder.append(", ");
 		builder.append("P Peak : " + ppeak);
 		return builder.toString();
 	}
