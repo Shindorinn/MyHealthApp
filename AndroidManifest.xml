@@ -51,8 +51,20 @@
             android:label="@string/title_activity_take_picture" >
         </activity>
         <activity
-            android:name="com.jcheed06.myhealthapp.measurement.ViewMeasurementsActivity"
+            android:name="com.jcheed06.myhealthapp.measurement.view.ViewMeasurementsActivity"
             android:label="@string/title_activity_view_measurements" >
+        </activity>
+        <activity
+            android:name="com.jcheed06.myhealthapp.measurement.view.ViewPulseMeasurementsActivity"
+            android:label="@string/title_activity_view_pulse_measurements" >
+        </activity>
+        <activity
+         	android:name ="com.jcheed06.myhealthapp.measurement.view.ViewECGMeasurementsActivity"
+            android:label="@string/title_activity_view_ecgmeasurements" >
+        </activity>
+        <activity
+         	android:name ="com.jcheed06.myhealthapp.measurement.view.ViewPressureMeasurementsActivity"
+            android:label="@string/title_activity_view_pressure_measurements" >
         </activity>
     </application>
 

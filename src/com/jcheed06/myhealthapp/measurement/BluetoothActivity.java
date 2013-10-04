@@ -16,6 +16,9 @@ import com.jcheed06.myhealthapp.R;
 import com.jcheed06.myhealthapp.Registry;
 import com.jcheed06.myhealthapp.R.id;
 import com.jcheed06.myhealthapp.R.layout;
+import com.jcheed06.myhealthapp.measurement.domain.ECGMeasurement;
+import com.jcheed06.myhealthapp.measurement.domain.PressureMeasurement;
+import com.jcheed06.myhealthapp.measurement.domain.PulseMeasurement;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -51,5 +51,8 @@
     <string name="choose_language">Choose Language</string>
     <string name="title_activity_view_measurements">ViewMeasurementsActivity</string>
     <string name="blocked_from_app">You have been blocked from the application!</string>
+    <string name="title_activity_view_pulse_measurements">ViewPulseMeasurementsActivity</string>
+    <string name="title_activity_view_ecgmeasurements">ViewECGMeasurementsActivity</string>
+    <string name="title_activity_view_pressure_measurements">ViewPressureMeasurementsActivity</string>
 
 </resources>

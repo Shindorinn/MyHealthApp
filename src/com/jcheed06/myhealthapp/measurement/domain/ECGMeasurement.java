@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp.measurement;
+package com.jcheed06.myhealthapp.measurement.domain;
 
 public class ECGMeasurement extends Measurement {
 	

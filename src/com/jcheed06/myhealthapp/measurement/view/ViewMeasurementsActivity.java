@@ -1,4 +1,4 @@
-package com.jcheed06.myhealthapp.measurement;
+package com.jcheed06.myhealthapp.measurement.view;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -12,6 +12,8 @@ import android.widget.ListView;
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.R;
 import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.measurement.RetrieveMeasurementsTask;
+import com.jcheed06.myhealthapp.measurement.domain.Measurement;
 
 public class ViewMeasurementsActivity extends Activity {
 

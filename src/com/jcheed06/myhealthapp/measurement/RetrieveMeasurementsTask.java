@@ -23,6 +23,7 @@ import android.util.Log;
 
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.measurement.domain.Measurement;
 
 public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<Measurement>> {
 

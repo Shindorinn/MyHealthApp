@@ -20,6 +20,9 @@ import org.json.JSONObject;
 
 import com.jcheed06.myhealthapp.BaseActivity;
 import com.jcheed06.myhealthapp.Registry;
+import com.jcheed06.myhealthapp.measurement.domain.ECGMeasurement;
+import com.jcheed06.myhealthapp.measurement.domain.PressureMeasurement;
+import com.jcheed06.myhealthapp.measurement.domain.PulseMeasurement;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
