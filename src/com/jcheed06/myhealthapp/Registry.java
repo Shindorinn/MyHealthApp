@@ -8,7 +8,7 @@ public final class Registry extends Activity{
 	public static final String BASE_API_URL = "http://145.37.53.101/MyHealthWeb/app";
 
 //	public static final String BASE_API_URL = "http://145.37.94.179/MyHealthWeb/app";
-	
+
 	public static final String CHARSET = "UTF-8";
 	public static final int SHARED_DATA_CONTEXT = Context.MODE_PRIVATE;	
 	public static final String LOGIN_BOOLEAN = "com.jcheed06.MainActivity.LOGIN_BOOLEAN";	
