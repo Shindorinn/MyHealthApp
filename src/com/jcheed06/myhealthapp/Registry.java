@@ -21,6 +21,7 @@ public final class Registry extends Activity{
 	public static final String SEND_URINE_TEST = "/photo/send";
 	public static final String RETRIEVE_MEASUREMENTS_COMMAND = "/measurement/retrieve";
 	public static final String SEND_MEASUREMENT_COMMAND = "/measurement/process";
+	public static final String DELETE_MEASUREMENT_COMMAND = "measurement/delete";
 	
 	public static final String REST_CALL_SUCCESS = "success";
 
@@ -31,6 +32,11 @@ public final class Registry extends Activity{
 	public static final String TAB_PULSE = "tab_pulse";
 	public static final String TAB_PRESSURE = "tab_pressure";
 	public static final String TAB_ECG = "tab_Ecg";
+
+	public static final String MEASUREMENT_TYPE_PULSE = "pulse";
+	public static final String MEASUREMENT_TYPE_PRESSURE = "pressure";
+	public static final String MEASUREMENT_TYPE_ECG = "ecg";
+	
 				
 	public static final int TASK_LOGIN_REQUEST 		   	= 0;
 	public static final int TASK_LOGIN_REQUEST_SUCCESS 	= 1;

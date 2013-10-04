@@ -31,26 +31,18 @@ public class RetrieveMeasurementsTask extends AsyncTask<String, Void, ArrayList<
 	protected ArrayList<Measurement> doInBackground(String... contactInfo) {
 		
 		ArrayList<Measurement> toReturn = new ArrayList<Measurement>();
-		
 		String urlToUse;
 		
 		if(contactInfo[0].equals(Registry.RETRIEVE_PULSE_MEASUREMENTS)){
-			
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_PULSE_MEASUREMENTS;
-			
 		}else if(contactInfo[0].equals(Registry.RETRIEVE_PRESSURE_MEASUREMENTS)){
-			
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_PRESSURE_MEASUREMENTS;
-			
 		}else if(contactInfo[0].equals(Registry.RETRIEVE_ECG_MEASUREMENTS)){
-			
 			urlToUse = Registry.BASE_API_URL + Registry.RETRIEVE_ECG_MEASUREMENTS;
-			
 		}else{
 			throw new IllegalArgumentException("Wrong retrieval command!");
 		}
-		
-		
+				
 		String id = contactInfo[1];
 		
 		DebugLogger.log_i("RetrieveMeasurementsTask", "id : " + id);
