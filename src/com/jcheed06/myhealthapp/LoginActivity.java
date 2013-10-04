@@ -138,14 +138,12 @@ public class LoginActivity extends BaseActivity {
 		        	editPassword.setError(getString(R.string.blocked_from_app));
 		        	focusView = editPassword;
 		        	focusView.requestFocus();
-		        	return false;
 		        }
-		        
-		        return false;
 		    } catch (Exception e) {
 		    	Log.e("H3:", e.toString());
-		    	return false;
 		    }
+		    
+		    return false;
 		}
 		
 		@Override
