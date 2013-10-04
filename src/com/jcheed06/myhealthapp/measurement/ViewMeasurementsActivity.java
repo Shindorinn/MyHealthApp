@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.R;
@@ -15,7 +17,8 @@ import com.jcheed06.myhealthapp.Registry;
 
 public class ViewMeasurementsActivity extends Activity {
 
-
+	TabHost tabHost;
+	
 	SharedPreferences spData;
 	
 	ListView pulseMeasurementsList;
@@ -38,6 +41,13 @@ public class ViewMeasurementsActivity extends Activity {
 
 		this.spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
 		
+		this.tabHost = (TabHost) this.findViewById(R.id.ViewMeasurementsTabhost);
+		
+		this.tabHost.addTab( this.tabHost.newTabSpec("pulse").setIndicator("Pulse").setContent(R.id.pulseTab));
+		this.tabHost.addTab( this.tabHost.newTabSpec("ECG").setIndicator("ECG").setContent(R.id.ecgTab));
+		this.tabHost.addTab( this.tabHost.newTabSpec("pressure").setIndicator("Pressure").setContent(R.id.pressureTab));
+		
+				
 		this.pulseListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
 		this.pressureListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
 		this.ecgListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
