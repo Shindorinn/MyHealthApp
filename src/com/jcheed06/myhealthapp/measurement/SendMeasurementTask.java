@@ -57,10 +57,9 @@ public class SendMeasurementTask extends BaseActivity {
 						num);
 				nameValuePairs.add(new BasicNameValuePair("username",
 						"cristianhalman"));
-				Date date = new Date();
-				Log.d("myhealth", "" + params[0]);
-				nameValuePairs.add(new BasicNameValuePair("timestamp",
-						"00-06-00 00:00:00"));
+				java.util.Date dt = new java.util.Date();
+				java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				nameValuePairs.add(new BasicNameValuePair("timestamp",sdf.format(dt)));
 				if (params[0] instanceof PressureMeasurement) {
 					PressureMeasurement pm = (PressureMeasurement) params[0];
 					type = "0";
