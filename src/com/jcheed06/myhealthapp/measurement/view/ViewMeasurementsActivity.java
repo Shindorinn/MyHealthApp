@@ -1,95 +1,58 @@
 package com.jcheed06.myhealthapp.measurement.view;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-
 import android.app.Activity;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TabHost;
 
 import com.jcheed06.myhealthapp.DebugLogger;
 import com.jcheed06.myhealthapp.R;
 import com.jcheed06.myhealthapp.Registry;
-import com.jcheed06.myhealthapp.measurement.RetrieveMeasurementsTask;
-import com.jcheed06.myhealthapp.measurement.domain.Measurement;
 
 public class ViewMeasurementsActivity extends Activity {
-
-
-	SharedPreferences spData;
 	
-	ListView pulseMeasurementsList;
-	ListView pressureMeasurementsList;
-	ListView ecgMeasurementsList;
-	
-	ArrayAdapter<Measurement> pulseListAdapter;
-	ArrayAdapter<Measurement> pressureListAdapter;
-	ArrayAdapter<Measurement> ecgListAdapter;
-	
+	TabHost tabHost;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		DebugLogger.log_i("ViewMeasurementsActivity", "in Oncreate");
 		this.initializeActivity();
 	}
 
 	private void initializeActivity() {
+		DebugLogger.log_i("ViewMeasurementsActivity", "in initializeActivity");
 		setContentView(R.layout.activity_view_measurements);
-
-		this.spData = this.getSharedPreferences(Registry.SHARED_DATA_NAME, Registry.SHARED_DATA_CONTEXT);
+		DebugLogger.log_i("ViewMeasurementsActivity", "setContentView done");
 		
-		this.pulseListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
-		this.pressureListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
-		this.ecgListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
+		TabHost tabHost = (TabHost) this.findViewById(R.id.viewMeasurementsTabhost);
 		
-		try{
-					
-			for(Measurement measurement : getPulseMeasurements()){
-				this.pulseListAdapter.add(measurement);
-			}
-			
-			for(Measurement measurement : getPressureMeasurements()){
-				this.pressureListAdapter.add(measurement);
-			}
-			
-			for(Measurement measurement : getECGMeasurements()){
-				this.ecgListAdapter.add(measurement);
-			}
-						
-			
-		}catch(InterruptedException iex){
-			DebugLogger.log_e("ViewMeasurementsActivity", iex.getMessage());
-		}catch(ExecutionException ex){
-			DebugLogger.log_e("ViewMeasurementsActivity", ex.getMessage());			
-		}
-	}
+		DebugLogger.log_i("ViewMeasurementsActivity", "found TabHost");
+		
+		TabHost.TabSpec spec;
+		Intent intent;
+		String indicator;
+  
+		intent = new Intent().setClass(ViewMeasurementsActivity.this, ViewPulseMeasurementsActivity.class);
+		
+		DebugLogger.log_i("ViewMeasurementsActivity", "intent : " + intent);
+		
+		indicator = getResources().getString(R.string.indicator_viewPulseMeasurements);
+		
+		DebugLogger.log_i("ViewMeasurementsActivity", "indicator : " + indicator);
+		/*
+		tabHost.addTab(tabHost.newTabSpec(Registry.TAB_PULSE).setIndicator(indicator).setContent(intent));
 
-	private ArrayList<Measurement> getPulseMeasurements() throws InterruptedException, ExecutionException{
-		RetrieveMeasurementsTask retriever = new RetrieveMeasurementsTask();
-		retriever.execute(Registry.RETRIEVE_PULSE_MEASUREMENTS, spData.getString("id", "3")); //TODO : Standard value needs to be replaced
-		return retriever.get();
-	}
-	
-	private ArrayList<Measurement> getPressureMeasurements() throws InterruptedException, ExecutionException{
-		RetrieveMeasurementsTask retriever = new RetrieveMeasurementsTask();
-		retriever.execute(Registry.RETRIEVE_PRESSURE_MEASUREMENTS, spData.getString("id", "3")); //TODO : Standard value needs to be replaced
-		return retriever.get();
-	}
-	
-	private ArrayList<Measurement> getECGMeasurements() throws InterruptedException, ExecutionException{
-		RetrieveMeasurementsTask retriever = new RetrieveMeasurementsTask();
-		retriever.execute(Registry.RETRIEVE_ECG_MEASUREMENTS, spData.getString("id", "3")); //TODO : Standard value needs to be replaced
-		return retriever.get();
-	}
+		intent = new Intent().setClass(ViewMeasurementsActivity.this, ViewPressureMeasurementsActivity.class);
+		indicator = getResources().getString(R.string.indicator_viewPressureMeasurements);
+		tabHost.addTab(tabHost.newTabSpec(Registry.TAB_PRESSURE).setIndicator(indicator).setContent(intent));
 
-//	private ArrayList<Measurement> getMeasurements() throws InterruptedException, ExecutionException {
-//		RetrieveMeasurementsTask retriever = new RetrieveMeasurementsTask();
-//		retriever.execute(Registry.RETRIEVE_PULSE_MEASUREMENTS, spData.getString("id", "3")); //TODO : Standard value needs to be replaced
-//		return retriever.get();
-//	}
-
+		intent = new Intent().setClass(ViewMeasurementsActivity.this, ViewECGMeasurementsActivity.class);
+		indicator = getResources().getString(R.string.indicator_viewECGMeasurements);
+		tabHost.addTab(tabHost.newTabSpec(Registry.TAB_ECG).setIndicator(indicator).setContent(intent));
+		*/
+		
+	}
 	
 	
 }

@@ -62,6 +62,7 @@ public class MainActivity extends BaseActivity {
     }
     
     public void viewMeasurements(View view){
-    	startActivityForResult(new Intent(this, ViewMeasurementsActivity.class), Registry.VIEW_MEASUREMENTS_REQUEST);
+    	DebugLogger.log_i("MainActivity", "viewMeasurements()");
+    	startActivity(new Intent(this, ViewMeasurementsActivity.class));
     }
 }

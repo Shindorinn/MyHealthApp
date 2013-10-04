@@ -27,6 +27,10 @@ public final class Registry extends Activity{
 	public static final String RETRIEVE_PULSE_MEASUREMENTS = "/measurement/retrieve/pulse";
 	public static final String RETRIEVE_PRESSURE_MEASUREMENTS = "/measurement/retrieve/pressure";
 	public static final String RETRIEVE_ECG_MEASUREMENTS = "/measurement/retrieve/ecg";
+
+	public static final String TAB_PULSE = "tab_pulse";
+	public static final String TAB_PRESSURE = "tab_pressure";
+	public static final String TAB_ECG = "tab_Ecg";
 				
 	public static final int TASK_LOGIN_REQUEST 		   	= 0;
 	public static final int TASK_LOGIN_REQUEST_SUCCESS 	= 1;

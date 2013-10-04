@@ -55,4 +55,10 @@
     <string name="title_activity_view_ecgmeasurements">ViewECGMeasurementsActivity</string>
     <string name="title_activity_view_pressure_measurements">ViewPressureMeasurementsActivity</string>
 
+    <!-- Strings related to tabs -->
+    
+    <string name = "indicator_viewPulseMeasurements">Pulse</string>
+    <string name = "indicator_viewPressureMeasurements">Pressure</string>
+    <string name = "indicator_viewECGMeasurements">ECG</string>
+    
 </resources>
