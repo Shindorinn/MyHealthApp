@@ -56,81 +56,9 @@ public class ViewPulseMeasurementsActivity extends Activity {
 		this.pulseListAdapter = new ArrayAdapter<Measurement>(this, android.R.layout.simple_list_item_1);
 		this.pulseMeasurementsList.setAdapter(this.pulseListAdapter);
 		
-		pulseMeasurementsList
-		.setOnItemClickListener(new OnItemClickListener() {
+		this.createOnItemClickListener();
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1,
-					int pos, long arg3) {
-
-				position = pos;
-
-				new AlertDialog.Builder(
-						ViewPulseMeasurementsActivity.this)
-						.setMessage(
-								getResources().getString(
-										R.string.delete_confirmation))
-						.setPositiveButton(
-								getResources().getString(
-										R.string.button_text_yes),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(
-											DialogInterface dialog,
-											int which) {
-										Measurement measurement = pulseListAdapter
-												.getItem(position);
-										Integer thisId = measurement
-												.getId();
-										String thisType = measurement
-												.getType();
-
-										DeleteMeasurementsTask deletemeasurement = new DeleteMeasurementsTask();
-										deletemeasurement.execute(
-												thisType,
-												thisId.toString());
-
-										try {
-											if (deletemeasurement.get()) {
-												pulseListAdapter
-														.remove(measurement);
-											} else {
-												Toast.makeText(
-														getBaseContext(),
-														getResources()
-																.getString(
-																		R.string.delete_error),
-														Toast.LENGTH_SHORT);
-											}
-										} catch (InterruptedException e) {
-											// TODO Auto-generated catch
-											// block
-											e.printStackTrace();
-										} catch (ExecutionException e) {
-											// TODO Auto-generated catch
-											// block
-											e.printStackTrace();
-										}
-									}
-								})
-						.setNegativeButton(
-								getResources().getString(
-										R.string.button_text_no),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(
-											DialogInterface dialog,
-											int which) {
-
-									}
-								}).show();
-			}
-		});
-		
-		try{
-					
+		try {
 			for(Measurement measurement : getPulseMeasurements()){
 				this.pulseListAdapter.add(measurement);
 			}			
@@ -140,6 +68,56 @@ public class ViewPulseMeasurementsActivity extends Activity {
 		}catch(ExecutionException ex){
 			DebugLogger.log_e("ViewMeasurementsActivity", ex.getMessage());			
 		}
+	}
+
+
+	private void createOnItemClickListener() {
+		pulseMeasurementsList.setOnItemClickListener(new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long arg3) {
+
+		position = pos;
+
+		new AlertDialog.Builder(ViewPulseMeasurementsActivity.this).setMessage(
+						getResources().getString(R.string.delete_confirmation))
+						.setPositiveButton(getResources().getString(R.string.button_text_yes),
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,	int which) {
+								Measurement measurement = pulseListAdapter.getItem(position);
+								Integer thisId = measurement.getId();
+								String thisType = measurement.getType();
+
+								DeleteMeasurementsTask deletemeasurement = new DeleteMeasurementsTask();
+								deletemeasurement.execute(thisType,	thisId.toString());
+
+								try {
+									if (deletemeasurement.get()) {
+										pulseListAdapter.remove(measurement);
+									} else {
+										Toast.makeText(
+												getBaseContext(),
+												getResources().getString(R.string.delete_error),
+												Toast.LENGTH_SHORT);
+									}
+								} catch (InterruptedException e) {
+									DebugLogger.log_e("ViewPressureMeasurementsActivity : ItemOnClickListener", e.getMessage());
+								} catch (ExecutionException e) {
+									DebugLogger.log_e("ViewPressureMeasurementsActivity : ItemOnClickListener", e.getMessage());
+								}
+							}
+						}).setNegativeButton(getResources().getString(R.string.button_text_no),
+								new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,	int which) {
+
+							}
+						}).show();
+			}
+		});
 	}
 
 	private ArrayList<Measurement> getPulseMeasurements() throws InterruptedException, ExecutionException{
