@@ -39,7 +39,7 @@ public class ViewECGMeasurementsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.view_ecgmeasurements, menu);
 		return true;
 	}
-
+	
 	private void initializeActivity(){
 		this.setContentView(R.layout.activity_view_ecgmeasurements);
 		

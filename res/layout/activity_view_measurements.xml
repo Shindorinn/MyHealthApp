@@ -1,67 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentLeft="true" >
 
-    <TextView
-        android:id="@+id/viewMeasurementsOnlineTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/title_activity_view_measurements_online"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TabHost
-        android:id="@+id/viewMeasurementsTabhost"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/viewMeasurementsOnlineTitle" >
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <TabWidget
+            android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content" >
+        </TabWidget>
 
-            <TabWidget
-                android:id="@android:id/tabs"
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:id="@+id/tab_pulse"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-            </TabWidget>
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+            <LinearLayout
+                android:id="@+id/tab_pressure"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/tab_pulse"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical" >
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_ecg"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical" >
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/tab_pressure"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical" >
-                </LinearLayout>
-                
-                <LinearLayout
-                    android:id="@+id/tab_ecg"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical" >
-                </LinearLayout>
-                
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
-
-</RelativeLayout>
+</TabHost>

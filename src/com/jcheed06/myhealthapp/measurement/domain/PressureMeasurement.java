@@ -14,10 +14,6 @@ public class PressureMeasurement extends Measurement {
 		this.setHyperTension(hyperTension);
 		this.setHypoTension(hypoTension);
 	}
-
-	public Integer getHypoTension() {
-		return hypoTension;
-	}
 	
 	@Override
 	public String getMeasurementValues() {
@@ -26,7 +22,16 @@ public class PressureMeasurement extends Measurement {
 		builder.append("HypoTension : " + hypoTension);
 		return builder.toString();
 	}
-		
+	
+	@Override
+	public String toString(){
+		return this.getMeasurementValues();
+	}
+
+	public Integer getHypoTension() {
+		return hypoTension;
+	}
+	
 	public void setHypoTension(Integer hypoTension) {
 		this.hypoTension = hypoTension;
 	}

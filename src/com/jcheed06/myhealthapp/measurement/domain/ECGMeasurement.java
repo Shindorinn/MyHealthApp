@@ -50,6 +50,11 @@ public class ECGMeasurement extends Measurement {
 		return builder.toString();
 	}
 	
+	@Override
+	public String toString(){
+		return this.getMeasurementValues();
+	}
+	
 	public Integer getPpeak() {
 		return ppeak;
 	}
