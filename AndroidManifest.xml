@@ -59,11 +59,11 @@
             android:label="@string/title_activity_view_pulse_measurements" >
         </activity>
         <activity
-         	android:name ="com.jcheed06.myhealthapp.measurement.view.ViewECGMeasurementsActivity"
+            android:name="com.jcheed06.myhealthapp.measurement.view.ViewECGMeasurementsActivity"
             android:label="@string/title_activity_view_ecgmeasurements" >
         </activity>
         <activity
-         	android:name ="com.jcheed06.myhealthapp.measurement.view.ViewPressureMeasurementsActivity"
+            android:name="com.jcheed06.myhealthapp.measurement.view.ViewPressureMeasurementsActivity"
             android:label="@string/title_activity_view_pressure_measurements" >
         </activity>
     </application>
