@@ -32,6 +32,7 @@
 	        android:id="@+id/button_take_measurement"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
+	        android:onClick="manageBluetooth"
 	        android:text="@string/take_measurement" />
 
 	    <Button
@@ -40,13 +41,6 @@
 	        android:layout_height="wrap_content"
 	        android:onClick="viewMeasurements"
 	        android:text="@string/view_measurements" />
-
-	    <Button
-	        android:id="@+id/button_manage_bluetooth_devices"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:onClick="manageBluetooth"
-	        android:text="@string/manage_bluetooth_devices" />
 
 	    <Button
 	        android:id="@+id/button_take_picture"
